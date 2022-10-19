@@ -2,4 +2,3 @@ node_modules
 certs
 keys
 .http-mitm-proxy
-*.txt
