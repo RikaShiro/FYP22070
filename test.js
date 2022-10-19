@@ -22,4 +22,3 @@ const options = {
 	port: 22070
 }
 proxy.listen(options)
-console.log(proxy.options.sslCaDir)
