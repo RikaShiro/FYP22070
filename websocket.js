@@ -1,15 +1,10 @@
 const Proxy = require('http-mitm-proxy')
+const Parser = require('./Parser.js')
 const proxy = Proxy()
+const parser = new Parser()
 
-proxy.onWebSocketFrame(function (ctx, type, fromServer, data, flags, callback) {
-	console.log(
-		'WEBSOCKET FRAME ' +
-			type +
-			' received from ' +
-			(fromServer ? 'server' : 'client'),
-		ctx.clientToProxyWebSocket.upgradeReq.url,
-		data
-	)
+proxy.onWebSocketFrame((ctx, type, fromServer, data, flags, callback) => {
+	parser.decode(data)
 	return callback(null, data, flags)
 })
 

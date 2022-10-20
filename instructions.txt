@@ -1,0 +1,7 @@
+turn on proxy in win10 setting
+run node script
+open cmd
+type certmgr to open certificate manager
+click trusted root -> certificate, right click -> all tasks -> import
+find certificate in .http-mitm-proxy
+import the certificate, it will be named nodemitmproxy

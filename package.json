@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "http-mitm-proxy": "^0.9.0"
+    "http-mitm-proxy": "^0.9.0",
+    "protobufjs": "^7.1.2"
   }
 }
