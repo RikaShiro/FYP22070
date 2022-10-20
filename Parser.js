@@ -1,4 +1,4 @@
-// try require('protobufjs/light') later
+// try require('protobufjs/light')
 const protobuf = require('protobufjs')
 const Game = require('./Game.js')
 const fs = require('fs')
@@ -34,7 +34,7 @@ class Parser {
             .decode(frame.data.data)
           this.parse(frame.data)
 				}
-				this.print(frame)
+				// this.print(frame)
 				break
 			case msgType.req:
 				break
@@ -42,7 +42,9 @@ class Parser {
 				break
 		}
 	}
-  parse(data) {
+	parse(data) {
+		// ActionDiscardTile
+		// DiscardTile
     const method = data.name.substring(6)
     data = data.data
     switch (method) {
@@ -54,7 +56,7 @@ class Parser {
         break
       case 'DealTile':
         if ('tile' in data) {
-          console.log(method, data.tile, 'myself')
+          console.log(method, 'myself')
         } else {
           console.log(method, 'opponent')
         }
@@ -68,11 +70,11 @@ class Parser {
     }
 	}
 	print(obj) {
-		fs.appendFileSync('./LOG', obj)
+		fs.appendFileSync('./LOG', JSON.stringify(obj) + '\n')
 		if ('data' in obj) {
 			this.print(obj.data)
     } else {
-      console.log('end')
+      fs.appendFileSync('./LOG', 'end\n')
     }
 	}
 }
