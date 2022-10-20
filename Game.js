@@ -8,7 +8,7 @@ class Player {
   }
 }
 class Game {
-	constructor(bonus) {
+	constructor() {
 		this.allTiles = {}
 		for (let j in ['m', 'p', 's']) {
 			for (let i = 0; i <= 9; i++) {
@@ -27,7 +27,7 @@ class Game {
 		for (let i = 1; i <= 7; i++) {
 			this.allTiles[i.toString() + 'z'] = 4
 		}
-		this.bonus = bouns ? bonus : 0
+		this.bonus = 0
     this.doras = []
     this.uraDoras = []
     this.hill = { ...this.allTiles }

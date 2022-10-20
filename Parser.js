@@ -1,6 +1,7 @@
 // try require('protobufjs/light') later
 const protobuf = require('protobufjs')
 const Game = require('./Game.js')
+const fs = require('fs')
 
 const msgType = {
 	notify: 1,
@@ -30,10 +31,10 @@ class Parser {
 				if (frame.name === 'ActionPrototype') {
 					frame.data.data = this.root
 						.lookupType(frame.data.name)
-						.decode(frame.data.data)
+            .decode(frame.data.data)
+          this.parse(frame.data)
 				}
 				this.print(frame)
-				this.parse({ name: frame.name, data: frame.data })
 				break
 			case msgType.req:
 				break
@@ -41,10 +42,33 @@ class Parser {
 				break
 		}
 	}
-	parse(data) {
+  parse(data) {
+    const method = data.name.substring(6)
+    data = data.data
+    switch (method) {
+      case 'NewRound':
+        console.log(method, data.tiles)
+        break
+      case 'DiscardTile':
+        console.log(method, data.tile)
+        break
+      case 'DealTile':
+        if ('tile' in data) {
+          console.log(method, data.tile, 'myself')
+        } else {
+          console.log(method, 'opponent')
+        }
+        break
+      case 'ChiPengGang':
+        console.log(method)
+        break
+      default:
+        console.log('other methods')
+        return
+    }
 	}
 	print(obj) {
-		console.log(JSON.stringify(obj))
+		fs.appendFileSync('./LOG', obj)
 		if ('data' in obj) {
 			this.print(obj.data)
     } else {
