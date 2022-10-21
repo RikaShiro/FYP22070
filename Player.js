@@ -1,3 +1,5 @@
+const shanten = require('./shanten.js')
+
 class Player {
 	constructor() {
 		// seat [0, 1, 2, 3]
@@ -22,11 +24,21 @@ class Player {
 class Self extends Player {
 	constructor() {
 		super()
-		this.hand = {}
+    this.hand = {}
+    this.shanten = 6
   }
   deal(tile) {
     if (tile in hand) hand[tile]++
     else hand[tile] = 1
+    if (this.count() === 14) {
+      shanten(this.hand)
+    }
+  }
+  count() {
+    let count = 0
+    for (const k in this.hand) {
+      count += this.hand[k]
+    }
   }
 }
 
