@@ -1,0 +1,33 @@
+{"tile":"4p","haveyi":true,"yiman":false,"count":1,"fu":30,"biao_dora_count":0,"yiman_zimo":false,"count_zimo":1,"fu_zimo":30}
+tingpais = [{tingpai}, {tingpai}, {tingpai}]
+
+interface tingpai {
+  tile: string
+  haveyi: boolean
+  yiman: boolean
+  count: number
+  fu: number
+  biao_dora_count: number = dora + red dora
+  yiman_zimo: boolean
+  count_zimo: boolean
+  fu_zimo: number  
+}
+
+{"liujumanguan":false,"players":[{"tingpai":false},{"tingpai":false},{"tingpai":true,"hand":["3m","3m","1p","2p","3p","3p","4p","5p","7p","7p","5s","6s","7s"],"tings":[{"tile":"3m","haveyi":true,"yiman":false,"count":1,"fu":40,"biao_dora_count":1,"yiman_zimo":false,"count_zimo":2,"fu_zimo":30},{"tile":"7p","haveyi":true,"yiman":false,"count":1,"fu":40,"biao_dora_count":1,"yiman_zimo":false,"count_zimo":2,"fu_zimo":30}]},{"tingpai":false}],"scores":[{"old_scores":[25000,25000,24000,25000],"delta_scores":[-1000,-1000,3000,-1000]}]}
+interface ActionNoTile {
+  liujumanguan: boolean
+  players: [
+    { tingpai: false },
+    { 
+      tingpai: true,
+      hand: string[]
+      tings: tingpai[]
+    },
+    { tingpai: false },
+    { tingpai: true }
+  ]
+  scores: {
+    old_scores: []
+    delta_scores: []
+  }
+}

@@ -1,12 +1,3 @@
-class Player {
-  constructor() {
-    this.seat = 0
-    this.self = false
-    this.points = 25000
-    this.riichi = false
-    this.daburuRiichi = false
-  }
-}
 class Game {
 	constructor() {
 		this.allTiles = {}
@@ -27,12 +18,26 @@ class Game {
 		for (let i = 1; i <= 7; i++) {
 			this.allTiles[i.toString() + 'z'] = 4
 		}
-		this.bonus = 0
-    this.doras = []
-    this.uraDoras = []
-    this.hill = { ...this.allTiles }
-    this.count = 136
+		this.hyouji = null
+		this.yama = { ...this.allTiles }
+		this.count = 0
+	}
+	// expect string or string[]
+	removeFromYama(tile) {
+		if (Array.isArray(tile)) {
+			for (let i of tile) {
+				yama[i]--
+			}
+		} else {
+			yama[tile]--
+		}
 	}
 }
 
 module.exports = Game
+// new round
+// if remaining points from last game. riichi but nobody won
+// init self hand
+// delete self hand from hill
+// delete doras from hill
+// calculate kaze

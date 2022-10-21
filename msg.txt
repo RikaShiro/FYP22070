@@ -95,3 +95,5 @@ end
 {"step":15,"name":"ActionDealTile","data":""}
 {"seat":3,"tile":"3m","left_tile_count":62,"operation":{"seat":3,"operation_list":[{"type":1}],"time_add":20000,"time_fixed":5000},"zhenting":false}
 end
+
+"tingpais":[{"tile":"4p","haveyi":true,"yiman":false,"count":1,"fu":30,"biao_dora_count":0,"yiman_zimo":false,"count_zimo":1,"fu_zimo":30},{"tile":"7p","haveyi":true,"yiman":false,"count":1,"fu":30,"biao_dora_count":0,"yiman_zimo":false,"count_zimo":1,"fu_zimo":30}]
