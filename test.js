@@ -1,2 +1,2 @@
-const Shanten = require('./Shanten.js')
-const shanten = new Shanten()
+const a = new Array(4)
+console.log(a)

@@ -35,9 +35,3 @@ class Game {
 }
 
 module.exports = Game
-// new round
-// if remaining points from last game. riichi but nobody won
-// init self hand
-// delete self hand from hill
-// delete doras from hill
-// calculate kaze

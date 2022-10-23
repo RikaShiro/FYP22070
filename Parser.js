@@ -2,7 +2,7 @@
 const protobuf = require('protobufjs')
 const Game = require('./Game.js')
 const { Player, Self } = require('./Player.js')
-const print = require('./supp.js')
+const { print } = require('./supp.js')
 
 const msgType = {
 	notify: 1,
@@ -10,9 +10,8 @@ const msgType = {
 	res: 3
 }
 let game = new Game()
-let players = new Array(4).fill(new Player())
-let inGame = false
 let self = new Self()
+const players = new Player(4)
 
 class Parser {
 	constructor() {
@@ -25,12 +24,29 @@ class Parser {
 		frame.data = this.root.lookupType(frame.name).decode(frame.data)
 		// .lq.ActionPrototype -> ActionPrototype
 		frame.name = frame.name.substring(4)
-		if (frame.name === 'ActionPrototype') {
-			frame.data.data = this.root
-				.lookupType(frame.data.name)
-				.decode(frame.data.data)
-			// this.parse(frame.data)
+		switch (frame.name) {
+			case 'ActionPrototype':
+				frame.data.data = this.root
+					.lookupType(frame.data.name)
+					.decode(frame.data.data)
+				// this.parse(frame.data)
+				break
+			case 'NotifyPlayerLoadGameReady':
+				for (let i = 0; i < 4; i++) {
+					ID[i] = frame.data.ready_id_list[i]
+				}
+				game = new Game()
+				break
+			case 'NotifyGameEndResult':
+				for (let i = 0; i < 4; i++) {
+					ID[i] = null
+					players[i] = null
+				}
+				break
+			default:
+				console.log('unexpected name')
 		}
+		// print(frame)
 	}
 	parse(data) {
 		// ActionDiscardTile -> DiscardTile
@@ -38,7 +54,7 @@ class Parser {
 		data = data.data
 		switch (method) {
 			case 'NewRound':
-				this.newRound(data)
+				self.hand = this.tilesToHand(data.tiles)
 				break
 			case 'DiscardTile':
 				game.removeFromYama(data.tile)
@@ -61,13 +77,8 @@ class Parser {
 				}
 				break
 			default:
-				console.log('other methods')
-				return
+				console.log('unexpected action')
 		}
-	}
-	newRound(data) {
-		inGame = true
-		self.hand = this.tilesToHand(data.tiles)
 	}
 	tilesToHand(tiles) {
 		const hand = {}
