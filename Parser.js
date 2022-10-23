@@ -24,6 +24,8 @@ class Parser {
 		switch (frame[0]) {
 			case msgType.notify:
 				frame = this.wrapper.decode(frame.slice(1))
+				// console.log(JSON.stringify(frame))
+				// console.log('notify')
 				try {
 					frame.data = this.root.lookupType(frame.name).decode(frame.data)
 				} catch (e) {
@@ -37,15 +39,19 @@ class Parser {
 					frame.data.data = this.root
 						.lookupType(frame.data.name)
 						.decode(frame.data.data)
-					this.parse(frame.data)
+					// this.parse(frame.data)
 				}
-				// this.print(frame)
+				this.print(frame, 'notify')
 				break
 			case msgType.req:
-				console.log('req')
+				// frame = this.wrapper.decode(frame.slice(3))
+				// console.log(JSON.stringify(frame))
+				// console.log('req')
 				break
 			case msgType.res:
-				console.log('res')
+				// frame = this.wrapper.decode(frame.slice(3))
+				// console.log(JSON.stringify(frame))
+				// console.log('res')
 				break
 		}
 	}
@@ -95,13 +101,14 @@ class Parser {
 		}
 		return hand
 	}
-	print(obj) {
-		fs.appendFileSync('./LOG', JSON.stringify(obj) + '\n')
+	print(obj, type) {
+		fs.appendFileSync('./LOG4', JSON.stringify(obj) + '\n')
 		if ('data' in obj) {
-			this.print(obj.data)
+			this.print(obj.data, type)
 		} else {
-			fs.appendFileSync('./LOG', 'end\n')
+			fs.appendFileSync('./LOG4', type + ' end\n')
 		}
+
 	}
 }
 
