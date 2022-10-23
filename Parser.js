@@ -1,9 +1,8 @@
 // try require('protobufjs/light')
-'use strict'
 const protobuf = require('protobufjs')
-const fs = require('fs')
 const Game = require('./Game.js')
 const { Player, Self } = require('./Player.js')
+const print = require('./supp.js')
 
 const msgType = {
 	notify: 1,
@@ -21,43 +20,20 @@ class Parser {
 		this.wrapper = this.root.lookupType('Wrapper')
 	}
 	decode(frame) {
-		switch (frame[0]) {
-			case msgType.notify:
-				frame = this.wrapper.decode(frame.slice(1))
-				// console.log(JSON.stringify(frame))
-				// console.log('notify')
-				try {
-					frame.data = this.root.lookupType(frame.name).decode(frame.data)
-				} catch (e) {
-					console.log(e)
-					return
-				}
-				// .lq.ActionPrototype
-				frame.name = frame.name.substring(4)
-				// ActionPrototype
-				if (frame.name === 'ActionPrototype') {
-					frame.data.data = this.root
-						.lookupType(frame.data.name)
-						.decode(frame.data.data)
-					// this.parse(frame.data)
-				}
-				this.print(frame, 'notify')
-				break
-			case msgType.req:
-				// frame = this.wrapper.decode(frame.slice(3))
-				// console.log(JSON.stringify(frame))
-				// console.log('req')
-				break
-			case msgType.res:
-				// frame = this.wrapper.decode(frame.slice(3))
-				// console.log(JSON.stringify(frame))
-				// console.log('res')
-				break
+		if (frame[0] !== msgType.notify) return
+		frame = this.wrapper.decode(frame.slice(1))
+		frame.data = this.root.lookupType(frame.name).decode(frame.data)
+		// .lq.ActionPrototype -> ActionPrototype
+		frame.name = frame.name.substring(4)
+		if (frame.name === 'ActionPrototype') {
+			frame.data.data = this.root
+				.lookupType(frame.data.name)
+				.decode(frame.data.data)
+			// this.parse(frame.data)
 		}
 	}
 	parse(data) {
-		// ActionDiscardTile
-		// DiscardTile
+		// ActionDiscardTile -> DiscardTile
 		const method = data.name.substring(6)
 		data = data.data
 		switch (method) {
@@ -97,18 +73,9 @@ class Parser {
 		const hand = {}
 		for (let i of tiles) {
 			if (i in hand) hand[i] = 1
-			else hand[i] ++
+			else hand[i]++
 		}
 		return hand
-	}
-	print(obj, type) {
-		fs.appendFileSync('./LOG4', JSON.stringify(obj) + '\n')
-		if ('data' in obj) {
-			this.print(obj.data, type)
-		} else {
-			fs.appendFileSync('./LOG4', type + ' end\n')
-		}
-
 	}
 }
 
