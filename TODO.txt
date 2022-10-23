@@ -1,0 +1,13 @@
+progress for this week.
+finally find a node.js module that is similar to mitmproxy and successfully decode majsoul messaages in "notify" type
+notify type can almost fulfill our requirements. but without 1 thing: player id
+
+1. GitHub ssh key problem (can git clone, but cannot push code)
+2. project url on gitee.com: https://gitee.com/wu-xianzhe/http-mitmproxy
+	click the url to view the private repository (valid in 3 days): https://gitee.com/wu-xianzhe/http-mitmproxy/invite_link?invite=13d32b5a8120e268c7f02c728402e2bee2afc3a07f99c4ccb7993663152babc51611f64ef7b4b32d5f318cd36bbddc3a
+	or wait util I solve the github problem
+3. chrome extension development
+4. get player id to match seatlist
+	best solution：decode things in .lq.lobby
+	or：force the user start an AI game first
+5. start FYP webpage (wordpress)
