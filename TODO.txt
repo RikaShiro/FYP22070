@@ -1,5 +1,5 @@
 progress for this week.
-finally find a node.js module that is similar to mitmproxy and successfully decode majsoul messaages in "notify" type
+finally found a node.js module that is similar to mitmproxy and successfully decode majsoul messaages in "notify" type
 notify type can almost fulfill our requirements. but without 1 thing: player id
 
 1. GitHub ssh key problem (can git clone, but cannot push code)

@@ -56,3 +56,6 @@ chakan/kakan = 加杠 对应雀魂addGang
 chankan = 抢杠
 naku = 鸣牌
 fuuro = 副露
+
+
+东南西北白发中
