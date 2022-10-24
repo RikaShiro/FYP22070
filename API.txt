@@ -36,3 +36,5 @@ chang = [0, 1, 2, 3] = [ton, nan, sha, pei]场
 ju = [0, 1, 2, 3] = [1, 2, 3, 4]局
 ju = seat时 自己是庄家 东风
 seat + 4 - ju % 4 = [0, 1, 2, 3] 自风 = [ton, nan, sha, pei]
+doras = dora hyoujihai 
+real dora tile = hyoujihai + 1
