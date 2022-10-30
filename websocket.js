@@ -4,7 +4,7 @@ const proxy = Proxy()
 const parser = new Parser()
 
 proxy.onWebSocketFrame((ctx, type, fromServer, data, flags, callback) => {
-	parser.decode(data)
+	// parser.decode(data)
 	return callback(null, data, flags)
 })
 

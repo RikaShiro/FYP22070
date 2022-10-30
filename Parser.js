@@ -2,6 +2,7 @@
 const protobuf = require('protobufjs/light')
 const { Game, Player, Self } = require('./Game.js')
 const { id } = require('./user.json')
+const { print } = require('./supp.js')
 const PRINT = 0
 
 const msgType = {
@@ -30,7 +31,8 @@ class Parser {
 				frame.data.data = this.root
 					.lookupType(frame.data.name)
 					.decode(frame.data.data)
-				this.parse(frame.data)
+				// this.parse(frame.data)
+				console.log(frame)
 				break
 			case 'NotifyPlayerLoadGameReady':
 				const list = frame.data.ready_id_list
@@ -53,7 +55,6 @@ class Parser {
 				return
 		}
 		if (PRINT) {
-			const { print } = require('./supp.js')
 			print(frame)
 		}
 	}
