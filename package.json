@@ -1,6 +1,18 @@
 {
   "dependencies": {
     "http-mitm-proxy": "^0.9.0",
-    "protobufjs": "^7.1.2"
-  }
+    "jimp": "^0.16.2",
+    "protobufjs": "^7.1.2",
+    "sharp": "^0.31.1"
+  },
+  "name": "fyp22070",
+  "version": "1.0.0",
+  "main": "Game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
