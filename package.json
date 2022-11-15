@@ -3,6 +3,7 @@
     "http-mitm-proxy": "^0.9.0",
     "jimp": "^0.16.2",
     "protobufjs": "^7.1.2",
+    "screenshot-desktop": "^1.12.7",
     "sharp": "^0.31.1"
   },
   "name": "fyp22070",

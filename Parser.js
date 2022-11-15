@@ -32,7 +32,7 @@ class Parser {
 					.lookupType(frame.data.name)
 					.decode(frame.data.data)
 				// this.parse(frame.data)
-				console.log(frame)
+				console.log(frame  )
 				break
 			case 'NotifyPlayerLoadGameReady':
 				const list = frame.data.ready_id_list
