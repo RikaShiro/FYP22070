@@ -1,26 +1,26 @@
 const sharp = require('sharp')
 const fs = require('node:fs')
 const path = require('node:path')
+sharp.cache(false)
 const options = {
 	format: 'png',
 	space: 'srgb',
 	channels: 3,
 	depth: 'uchar',
-	density: 96,
+	density: 120,
 	isProgressive: false,
 	hasProfile: false,
 	hasAlpha: false
 }
 
 const dirname = './images'
-fs.readdirSync(dirname).forEach((filename) => {
-	const p = path.join(dirname, filename)
-	sharp(p)
-		.withMetadata({
-			channels: 3,
-			density: 96,
-			hasAlpha: false
-		})
-		.resize(80, 120)
-		.toFile(p)
-})
+fs.readdirSync(dirname)
+	.filter((x) => path.extname(x) === '.PNG')
+	.forEach(async (filename) => {
+		const img = path.join(dirname, filename)
+		const buffer = await sharp(img)
+			.withMetadata(options)
+			.resize(80, 120)
+			.toBuffer()
+		sharp(buffer).toFile(img)
+	})
