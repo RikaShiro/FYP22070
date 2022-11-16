@@ -1,0 +1,313 @@
+Wrapper {
+  name: '.lq.NotifyRoomPlayerUpdate',
+  data: NotifyRoomPlayerUpdate {
+    update_list: [ [PlayerBaseView] ],
+    remove_list: [],
+    player_list: [ [PlayerBaseView] ],
+    owner_id: 15058986,
+    robot_count: 0,
+    seq: 1
+  }
+}
+Wrapper {
+  name: '.lq.NotifyRoomPlayerUpdate',
+  data: NotifyRoomPlayerUpdate {
+    update_list: [],
+    remove_list: [],
+    player_list: [ [PlayerBaseView] ],
+    owner_id: 15058986,
+    robot_count: 1,
+    seq: 2
+  }
+}
+Wrapper {
+  name: '.lq.NotifyRoomPlayerUpdate',
+  data: NotifyRoomPlayerUpdate {
+    update_list: [],
+    remove_list: [],
+    player_list: [ [PlayerBaseView] ],
+    owner_id: 15058986,
+    robot_count: 2,
+    seq: 3
+  }
+}
+Wrapper {
+  name: '.lq.NotifyRoomPlayerUpdate',
+  data: NotifyRoomPlayerUpdate {
+    update_list: [],
+    remove_list: [],
+    player_list: [ [PlayerBaseView] ],
+    owner_id: 15058986,
+    robot_count: 3,
+    seq: 4
+  }
+}
+Wrapper {
+  name: '.lq.NotifyRoomGameStart',
+  data: NotifyRoomGameStart {
+    game_url: '172.30.16.148:4028',
+    connect_token: '3e89426a-3015-4a12-8634-85494afc95e8',
+    game_uuid: '221116-71492e6c-23ef-4ac9-940a-ecb10b8ab535',
+    location: 'local'
+  }
+}
+Wrapper {
+  name: '.lq.NotifyPlayerLoadGameReady',
+  data: NotifyPlayerLoadGameReady { ready_id_list: [ 0, 0, 0, 15058986 ] }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype { step: 0, name: 'ActionMJStart', data: <Buffer > }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 1,
+    name: 'ActionNewRound',
+    data: <Buffer 1f f6 fb e4 f8 4e f2 14 e5 29 01 1a 29 60 59 ff 7a 69 53 52 74 4e 18 aa 19 00 13 9c 48 02 49 65 e3 27 bf 5c fd da bd 9a a3 72 a6 c8 ba 8b f5 ce fd b2 ... 82 more bytes>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 2,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7c 63 68 51 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 3,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 75 71 26 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 4,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7d 63 68 53 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 5,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 76 71 21 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 6,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7e 63 68 52 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 7,
+    name: 'ActionDealTile',
+    data: <Buffer 9a 72 74 5d 6d b3 53 d3 70 b2 96 90 9e 8a fe 79 9e df 70 ca e8 31 92 1b a5>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 8,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7f 63 68 50 a4 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 9,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 74 71 23 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 10,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7c 63 68 5f a7 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 11,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 75 71 22 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 12,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7d 63 68 55 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 13,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 76 71 5d 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 14,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7e 63 68 57 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 15,
+    name: 'ActionDealTile',
+    data: <Buffer 9a 72 74 5d 6f a4 53 af 70 b2 96 90 9e 8a fe 79 9e df 70 ca e8 31 92 1b a5>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 16,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7f 63 68 55 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 17,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 74 71 5f 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 18,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7c 63 68 55 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 19,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 75 71 5e 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 20,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7d 63 68 5f a4 4e 9c 75 cb 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 21,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 76 71 59 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 22,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7e 63 68 53 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 23,
+    name: 'ActionDealTile',
+    data: <Buffer 9b 71 75 62 6b ba 54 a8 71 cc 97 97 9f 8b ff 78 9f 60 b0 e4 49 9d 8e 24>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 24,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7f 63 68 50 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 25,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 74 71 5b 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 26,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7c 63 68 50 b9 4e 9c 75 cb 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 27,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 75 71 5a 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 28,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7d 63 68 51 ae 4e 9c 75 ca 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 29,
+    name: 'ActionDealTile',
+    data: <Buffer 9d 76 71 55 66 cc>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 30,
+    name: 'ActionDiscardTile',
+    data: <Buffer 95 7e 63 68 5e a7 4e 9c 75 cb 99 9e df 93>
+  }
+}
+Wrapper {
+  name: '.lq.ActionPrototype',
+  data: ActionPrototype {
+    step: 31,
+    name: 'ActionDealTile',
+    data: <Buffer 9b 71 75 62 6a b9 54 a4 71 cc 97 97 9f 8b ff 78 9f 28 ab e4 49 9d 8e 24>
+  }
+}
+Wrapper {
+  name: '.lq.NotifyGameTerminate',
+  data: NotifyGameTerminate { reason: 'user-manual-terminate' }
+}

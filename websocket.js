@@ -1,16 +1,15 @@
 const Proxy = require('http-mitm-proxy')
-const Parser = require('./Parser.js')
+const Parser = require('./SimpleParser.js')
 const { preprocess } = require('./preprocess.js')
 
 preprocess('./images')
+
 const proxy = Proxy()
 const parser = new Parser()
-proxy.onWebSocketFrame((_ctx, _type, _fromServer, data, flags, callback) => {
-	parser.decode(data)
+proxy.onWebSocketFrame((_ctx, _type, fromServer, data, flags, callback) => {
+	if (fromServer) {
+		parser.parse(data)
+	}
 	return callback(null, data, flags)
 })
-
-const options = {
-	port: 22070
-}
-proxy.listen(options)
+proxy.listen({ port: 22070 })

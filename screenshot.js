@@ -1,7 +1,35 @@
 const screenshot = require('screenshot-desktop')
 const sharp = require('sharp')
-const { options } = require('./imageOptions.js')
+const { metadata, pngOptions } = require('./imageOptions.js')
 
-screenshot().then(async (img) => {
-  img = sharp(img).withMetadata(options).resize(1920, 1080).toBuffer()
-})
+sharp.cache(true)
+const hand = {
+	left: 220,
+	top: 930,
+	width: 1240,
+	height: 140
+}
+function getHand() {
+	screenshot().then((img) => {
+		const buffer = sharp(img)
+			.withMetadata(metadata)
+			.png(pngOptions)
+			.resize(1920, 1080)
+			.extract(hand)
+			.toBuffer()
+	})
+}
+
+function getSample() {
+	setTimeout(() => {
+		screenshot().then((img) => {
+			sharp(img)
+				.withMetadata(metadata)
+				.png(pngOptions)
+				.resize(1920, 1080)
+				.toFile('xxx.PNG')
+		})
+	}, 5000)
+}
+
+module.exports = { getHand }

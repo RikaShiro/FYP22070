@@ -1,12 +1,11 @@
-const options = {
-	format: 'png',
-	space: 'srgb',
-	channels: 3,
-	depth: 'uchar',
-	density: 96,
-	isProgressive: false,
-	hasProfile: false,
-	hasAlpha: false
+const metadata = {
+	density: 96
 }
 
-module.exports = { options }
+const pngOptions = {
+	colors: 256,
+	progressive: false,
+	palette: false,
+	force: true
+}
+module.exports = { metadata, pngOptions }
