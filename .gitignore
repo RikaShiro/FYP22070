@@ -1,6 +1,6 @@
 node_modules
-certs
-keys
 .http-mitm-proxy
+.ipynb_checkpoints
 opencv.js
+game-log
 images/fullscreen
