@@ -3,4 +3,4 @@ certs
 keys
 .http-mitm-proxy
 /opencv.js
-images/fullscreen/
+images/fullscreen/*.PNG
