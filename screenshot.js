@@ -29,7 +29,8 @@ function getSample() {
 				.resize(1920, 1080)
 				.toFile('xxx.PNG')
 		})
-	}, 5000)
+	}, 10000)
 }
 
+getSample()
 module.exports = { getHand }
