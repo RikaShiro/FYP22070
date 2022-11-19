@@ -4,6 +4,7 @@ const { metadata, pngOptions } = require('./imageOptions.js')
 const fs = require('node:fs')
 const path = require('node:path')
 
+// from 084
 const dirname = './images/20221117'
 let idx = fs.readdirSync(dirname).length
 
