@@ -4,7 +4,6 @@ const { metadata, pngOptions } = require('./imageOptions.js')
 const fs = require('node:fs')
 const path = require('node:path')
 
-// from 084
 const dirname = './images/20221117'
 let idx = fs.readdirSync(dirname).length
 
@@ -17,7 +16,8 @@ setTimeout(() => {
 			.png(pngOptions)
 			.resize(1920, 1080)
 			.extract({ left: 220, top: 920, width: 1240, height: 160 })
-			.toFile(writePath)
+			// .toFile(writePath)
+			.toBuffer()
 		idx++
 	})
 }, 4000)

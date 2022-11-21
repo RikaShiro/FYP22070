@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 
-def detect_object(img_target, img_template, threshold=0.6):
+def detect_object(img_target, img_template, threshold=0.9):
   img_gray = cv.cvtColor(img_target, cv.COLOR_BGR2GRAY)
   w, h = img_template.shape[::-1]
   res = cv.matchTemplate(img_gray, img_template, cv.TM_CCOEFF_NORMED)

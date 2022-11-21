@@ -1,6 +1,9 @@
 1. cannot install pytorch CUDA11.6
 solution: uninstall python3.11 and install python3.10
 2. cannot find "import module torch"
+guess: MSYS2, the C/C++ complier installed another python inside it
+which makes incapability
+  2.1. ModuleNotFoundError: No module named 'cv2'
 3. OSError: The paging file is too small for this operation to complete.
 solved in github issue# 1036
 4. torch.cuda.OutOfMemoryError: CUDA out of memory.
@@ -12,4 +15,17 @@ solution
   3.1. RuntimeError: indices should be either on cpu or on the same device as the indexed tensor (cpu)
   solution give up GPU. uninstall all the pip packages and reinstall things
   3.2. AssertionError: Torch not compiled with CUDA enabled
-  
+  reboot the PC. delete default Nvidia driver and install 11.6 version
+
+opencv.js
+diff py and js
+function problem
+image problem
+
+start yolo v7
+dataset collection
+  tiles
+  table images
+installation
+start training
+detection

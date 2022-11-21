@@ -8,7 +8,8 @@ async function onRuntimeInitialized() {
 	const dst = new cv.Mat()
   const mask = new cv.Mat()
   cv.matchTemplate(src, templ, dst, cv.TM_CCOEFF_NORMED, mask)
-  let result = cv.minMaxLoc(dst, mask)
+  
+	let result = cv.minMaxLoc(dst, mask)
 	let maxPoint = result.maxLoc
 	let color = new cv.Scalar(255, 0, 0, 255)
 	let point = new cv.Point(maxPoint.x + templ.cols, maxPoint.y + templ.rows)
