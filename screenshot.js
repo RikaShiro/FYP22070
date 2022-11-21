@@ -20,17 +20,5 @@ function getHand() {
 	})
 }
 
-function getSample() {
-	setTimeout(() => {
-		screenshot().then((img) => {
-			sharp(img)
-				.withMetadata(metadata)
-				.png(pngOptions)
-				.resize(1920, 1080)
-				.toFile('xxx.PNG')
-		})
-	}, 10000)
-}
-
 getSample()
 module.exports = { getHand }

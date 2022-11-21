@@ -8,4 +8,16 @@ const pngOptions = {
 	palette: false,
 	force: true
 }
-module.exports = { metadata, pngOptions }
+
+const hand = {
+	left: 220,
+	top: 935,
+	width: 95,
+	height: 137
+}
+
+// 315 410 505 600 695 790 885
+// 935 1072
+// 1484 935 95 137
+
+module.exports = { metadata, pngOptions, hand }
