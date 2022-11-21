@@ -16,7 +16,7 @@ def detect_object(img_target, img_template, threshold=0.6):
 
 
 img_rgb = cv.imread('./result.PNG')
-template = cv.imread('./images/16.PNG', 0)
+template = cv.imread('./images/singleTiles/16.PNG', 0)
 
 bboxes = detect_object(img_rgb, template)
 for bbox in bboxes:

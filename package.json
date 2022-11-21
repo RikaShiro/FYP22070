@@ -2,6 +2,7 @@
   "dependencies": {
     "http-mitm-proxy": "^0.9.0",
     "jimp": "^0.16.2",
+    "numjs": "^0.16.1",
     "protobufjs": "^7.1.2",
     "screenshot-desktop": "^1.12.7",
     "sharp": "^0.31.2"
