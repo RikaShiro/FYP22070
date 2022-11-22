@@ -1,18 +1,30 @@
 const sharp = require('sharp')
-const cv = require('@rikashiro/opencv-js')
 
-async function matchTemplate() {
-	const src = await readImageSharp('./images/fullscreen/000.PNG')
-	const templ = await readImageSharp('./images/tiles/16.PNG')
-	// const templ = await readImageSharp(input)
+function loadOpenCV() {
+	if (global.cv && global.Module) {
+		return Promise.resolve()
+	} else {
+		return new Promise((resolve) => {
+			global.Module = {
+				onRuntimeInitialized: resolve
+			}
+			global.cv = require('./opencv.js')
+		})
+	}
+}
+
+async function matchTemplate(src, templ) {
+	await loadOpenCV()
+	src = await readImageSharp(src)
+	templ = await readImageSharp(templ)
 	const dst = new cv.Mat()
 	const mask = new cv.Mat()
 	cv.matchTemplate(src, templ, dst, cv.TM_CCOEFF_NORMED, mask)
 	const result = cv.minMaxLoc(dst, mask).maxVal
-	src.delete()
-	templ.delete()
-	dst.delete()
-	console.log(result)
+	for (const m of [src, templ, dst, mask]) {
+		m.delete()
+	}
+	return result
 
 	async function readImageSharp(input) {
 		const { data, info } = await sharp(input)
@@ -25,10 +37,3 @@ async function matchTemplate() {
 }
 
 module.exports = { matchTemplate }
-
-// https://github.com/lovell/sharp/issues/3291
-// https://blog.csdn.net/jm_12138/article/details/122910737
-// https://docs.opencv.org/4.x/dc/de6/tutorial_js_nodejs.html
-// https://emscripten.org/docs/api_reference/module.html
-// https://www.npmjs.com/package/opencv4js
-// https://codeberg.org/arghyadeep/opencv4js.git
