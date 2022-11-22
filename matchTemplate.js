@@ -1,16 +1,7 @@
 const sharp = require('sharp')
-function loadOpenCV() {
-	return new Promise((resolve) => {
-		global.Module = {
-			onRuntimeInitialized: resolve
-		}
-		global.cv = require('./opencv.js')
-	})
-}
+const cv = require('@rikashiro/opencv-js')
 
 async function matchTemplate() {
-	await loadOpenCV()
-
 	const src = await readImageSharp('./images/fullscreen/000.PNG')
 	const templ = await readImageSharp('./images/tiles/16.PNG')
 	// const templ = await readImageSharp(input)
