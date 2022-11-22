@@ -10,3 +10,10 @@ npm config set registry https://registry.npmjs.org
 npm config set registry https://registry.npm.taobao.org
 
 use ctrl + K ,V to open sideview of markdown
+
+20221122
+1. solve opencv.js import issue
+use try catch to prevent opencv.js printing endless error messgae in terminal
+2. can now get tiles in hand by slicing the picture
+however cannot recognize aka dora tiles
+3. move on to shanten number calculation
