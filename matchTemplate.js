@@ -1,7 +1,7 @@
 const sharp = require('sharp')
 
 function loadOpenCV() {
-	if (global.cv && global.Module) {
+	if (global.cv) {
 		return Promise.resolve()
 	} else {
 		return new Promise((resolve) => {
