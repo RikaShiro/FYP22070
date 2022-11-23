@@ -3,9 +3,7 @@ const { Buffer } = require('node:buffer')
 function shanten(
 	hand = [11, 11, 11, 12, 13, 15, 16, 34, 35, 38, 59, 59, 71, 72]
 ) {
-	// const n = hand.length
-	// if (n !== 13) return null
-	// else if (hand.includes(-1)) return null
+	if (hand.includes(-1)) return null
 	hand = arrayToMap(hand)
 	hand = mapToString(hand)
 	hand = stringToBinary(hand)
