@@ -1,15 +1,15 @@
 const metadata = {
-	density: 96
-}
+  density: 96,
+};
 
 const pngOptions = {
-	colors: 256,
-	progressive: false,
-	palette: false,
-	force: true
-}
+  colors: 256,
+  progressive: false,
+  palette: false,
+  force: true,
+};
 
-module.exports = { metadata, pngOptions }
+module.exports = {metadata, pngOptions};
 
 // left: 220,
 // top: 935,
