@@ -18,9 +18,7 @@ function shanten(
 				M.set(i, 1)
 			}
 		}
-		return Array.from(M.entries()).sort((a, b) => {
-			return a[0] - b[0]
-		})
+		return Array.from(M.entries()).sort((a, b) => a[0] - b[0])
 	}
 
 	function mapToString(A) {
