@@ -9,3 +9,11 @@ https://github.com/opencv/opencv/issues/15315
 https://github.com/peteruhnak/opencv-ts/blob/master/lib/loader.js
 
 https://zhuanlan.zhihu.com/p/31000381
+
+node.js stream
+  https://juejin.cn/post/6854573219060400141
+  https://zhuanlan.zhihu.com/p/36728655
+
+romaji <-> hiragana/katakana: alt + ~
+-> katakana: alt + capslock
+-> hiragana: ctrl + capslock

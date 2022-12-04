@@ -40,30 +40,29 @@ function shanten(
 			.join('')
 			.split('.')
 			.map((x) => {
-				const a = Number(x)
-				const b = Number(x.split('').reverse().join(''))
-				return a < b ? a : b
+        const y = x.split('').reverse().join('')
+				return Number(x) < Number(y) ? x : y
 			})
 		q.sort((a, b) => b - a)
 		return q.join('.')
 	}
 
-	function stringToBinary(s) {
-		const M = new Map([
-			['1', '00'],
-			['2', '01'],
-			['3', '10'],
-			['4', '11'],
-			['.', '10']
-		])
-		let buffer = '11'
-		for (const i of s) {
-			buffer += M.get(i)
+	function stringToBinary(str) {
+		let s = '11'
+		for (const i of str) {
+			s += M.get(i)
 		}
-		return Buffer.from(buffer, 'binary')
+		return Buffer.from(s, 'binary')
 	}
 }
 
+const M = new Map([
+	['1', '00'],
+	['2', '01'],
+	['3', '10'],
+	['4', '11'],
+	['.', '10']
+])
 let stn = shanten()
 console.log(stn.toString())
 module.exports = { shanten }
