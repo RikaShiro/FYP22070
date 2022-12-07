@@ -33,6 +33,7 @@ if (isMainThread) {
 			if (msg === null) {
 				count++
 				if (count === n - 1) {
+					console.log(st.size)
 					writeFileSync('enumeration.json', BigUint64Array.from(st))
 					console.timeEnd()
 				}

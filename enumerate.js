@@ -102,7 +102,6 @@ function insert(A = [2, 4, 4, 4]) {
 			.sort((a, b) => Number(a) - Number(b))
 			.join('9')
 		st.add(BigInt(q))
-		return
 	}
 
 	function merge(x, y) {
