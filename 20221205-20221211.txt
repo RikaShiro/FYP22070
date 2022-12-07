@@ -1,0 +1,2 @@
+1. TypeError: Do not know how to serialize a BigInt
+JSON.stringify does not work on BigInt

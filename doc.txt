@@ -17,3 +17,44 @@ node.js stream
 romaji <-> hiragana/katakana: alt + ~
 -> katakana: alt + capslock
 -> hiragana: ctrl + capslock
+
+I tried to encode things from string to BigUint64 and write them to a file for further use.
+BigInt cannot be stringified using JSON, so I directly write as BigUint64Array.
+
+However when I would like to read the file and recover BigUint64Array, I received a buffer and problem is that I don't know how to convert the buffer to BigUint64Array
+
+
+```
+const { writeFileSync, readFileSync } = require('node:fs')
+
+const st = new Set([1n, 2n, 3n, 1n, 1n, 1n])
+const A = BigUint64Array.from(st)
+console.log(A)
+
+writeFileSync('./abc', A)
+let x = readFileSync('./abc')
+x = BigUint64Array.from(x)
+console.log(x)
+```
+
+when I try to run this code, I receive
+
+```
+node .\test.js
+BigUint64Array(3) [ 1n, 2n, 3n ]
+R:\mahjong\FYP22070\test.js:9
+x = BigUint64Array.from(x)
+                   ^
+
+TypeError: Cannot convert 1 to a BigInt
+    at Function.from (<anonymous>)
+    at Object.<anonymous> (R:\mahjong\FYP22070\test.js:9:20)
+    at Module._compile (node:internal/modules/cjs/loader:1159:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1213:10)
+    at Module.load (node:internal/modules/cjs/loader:1037:32)
+    at Module._load (node:internal/modules/cjs/loader:878:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:23:47
+```
+
+so I am wondering how should I do

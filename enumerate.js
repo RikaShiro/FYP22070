@@ -2,7 +2,10 @@ const { writeFileSync } = require('node:fs')
 module.exports = { permute14, insert }
 
 function permute14() {
-	const decomposition = decompose()
+	const decomposition = []
+	for (const n of [14, 11, 8, 5, 2]) {
+		decomposition.push(...decompose(n))
+	}
 	writeFileSync('decomposition.json', JSON.stringify(decomposition))
 	const permutation = decomposition.flatMap((x) => permute(x))
 	writeFileSync('permutation.json', JSON.stringify(permutation))
@@ -62,13 +65,6 @@ function insert(A = [2, 4, 4, 4]) {
 	const st = new Set()
 	const n = A.length
 	const q = []
-	const M = new Map([
-		[1, '00'],
-		[2, '01'],
-		[3, '10'],
-		[4, '11'],
-		[9, '.']
-	])
 	DFS(0, 0)
 	return st
 
@@ -83,6 +79,7 @@ function insert(A = [2, 4, 4, 4]) {
 			DFS(k, sum + 1)
 			q.pop()
 		}
+		;``
 		if (sum <= 6) {
 			q.push(2)
 			DFS(k, sum + 2)
@@ -94,16 +91,18 @@ function insert(A = [2, 4, 4, 4]) {
 	}
 
 	function addToSet(q) {
-		q = merge(A, q).map((x) => M.get(x))
+		q = merge(A, q)
 		q = q
 			.join('')
-			.split('.')
+			.split('9')
 			.map((x) => {
 				const y = x.split('').reverse().join('')
-				return BigInt(x) < BigInt(y) ? x : y
+				return Number(x) < Number(y) ? x : y
 			})
-		q = '11' + q.sort((a, b) => (BigInt(a) < BigInt(b) ? -1 : 1)).join('')
+			.sort((a, b) => Number(a) - Number(b))
+			.join('9')
 		st.add(BigInt(q))
+		return
 	}
 
 	function merge(x, y) {
