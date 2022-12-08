@@ -1,17 +1,17 @@
 const { writeFileSync, readFileSync } = require('node:fs')
+const { createGzip } = require('node:zlib')
+const { pipeline } = require('node:stream')
+const { createReadStream, createWriteStream } = require('node:fs')
 
-const st = new Set([1n, 2n, 3n, 1n, 1n, 1n])
-const A = BigUint64Array.from(st)
-console.log(A)
-writeFileSync('./abc', A)
-let x = readFileSync('./abc')
-x = new BigUint64Array(x)
-console.log(x)
+let x = readFileSync('./enumeration')
+// x = Uint8Array.from(x)
+// x = new BigUint64Array(x.buffer)
+const gzip = createGzip()
+const destination = createWriteStream('./test.gz')
 
-// const st = new Set([1, 2, 3, 4, 1, 1, 1])
-// let A = Uint32Array.from(st)
-// console.log(A)
-// writeFileSync('./abc', Buffer.from(A))
-// let x = readFileSync('./abc')
-// x = new Uint32Array(x)
-// console.log(x)
+pipeline(x, gzip, destination, (err) => {
+  if (err) {
+    console.error('An error occured: ', err)
+    process.exitCode = 1
+  }
+})

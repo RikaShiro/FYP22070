@@ -1,2 +1,4 @@
 1. TypeError: Do not know how to serialize a BigInt
 JSON.stringify does not work on BigInt
+2. how to convert an Array of length <= 56 strings to BigUInt64Array, so that it's less space consuming
+add '0b' at the beginning

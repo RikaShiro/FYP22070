@@ -3,5 +3,7 @@ node_modules
 .ipynb_checkpoints
 opencv.js
 game-log
-images/20221117
+images/
+!images/tiles
 liqi.json
+enumeration

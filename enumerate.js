@@ -65,6 +65,13 @@ function insert(A = [2, 4, 4, 4]) {
 	const st = new Set()
 	const n = A.length
 	const q = []
+	const M = new Map([
+		['1', '00'],
+		['2', '01'],
+		['3', '10'],
+		['4', '11'],
+		['9', '11']
+	])
 	DFS(0, 0)
 	return st
 
@@ -79,7 +86,6 @@ function insert(A = [2, 4, 4, 4]) {
 			DFS(k, sum + 1)
 			q.pop()
 		}
-		;``
 		if (sum <= 6) {
 			q.push(2)
 			DFS(k, sum + 2)
@@ -101,6 +107,10 @@ function insert(A = [2, 4, 4, 4]) {
 			})
 			.sort((a, b) => Number(a) - Number(b))
 			.join('9')
+			.split('')
+			.map(x => M.get(x))
+		// '0b' = binary format
+		q = '0b11' + q.join('')
 		st.add(BigInt(q))
 	}
 
@@ -113,4 +123,20 @@ function insert(A = [2, 4, 4, 4]) {
 		A.push(x.at(-1))
 		return A
 	}
+
+	function hex(s) {
+		s = parseInt(0)
+	}
+}
+
+function test() {
+	const D = decompose(5)
+	const P = D.flatMap((x) => permute(x))
+	const st = new Set()
+	P.forEach((x) => {
+		for (const i of insert(x).values()) {
+			st.add(i)
+		}
+	})
+	console.log(st.size)
 }
