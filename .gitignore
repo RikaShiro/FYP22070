@@ -1,9 +1,15 @@
 node_modules
 .http-mitm-proxy
 .ipynb_checkpoints
-opencv.js
 game-log
 images/
 !images/tiles
+
+opencv.js
+test.js
+enumerations
+shanten
 liqi.json
-enumeration
+decomposition.json
+permutation.json
+user.json

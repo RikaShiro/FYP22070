@@ -68,8 +68,9 @@ async function getFullHand(fullscreen) {
 ;(async () => {
 	const hand = await getFullHand('./images/fullscreen/002.PNG')
 	try {
-		const stn = shanten(hand)
-		console.log(hand, stn)
+		// const stn = shanten(hand)
+		// console.log(hand, stn)
+		console.log(hand)
 	} catch (e) {
 		console.log(e)
 	}
