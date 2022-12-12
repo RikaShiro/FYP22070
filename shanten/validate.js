@@ -1,4 +1,4 @@
-const { shanten } = require('./shanten.js')
+const { shanten } = require('./helper.js')
 
 function str2int(str) {
 	const m = str.indexOf('m')

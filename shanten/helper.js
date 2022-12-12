@@ -1,4 +1,4 @@
-module.exports = { getPermutations, insert, hand2int, shanten }
+module.exports = { getPermutations, insert, hand2int, calShanten }
 
 function getPermutations() {
 	const decomposition = []
@@ -144,7 +144,7 @@ function arr2int(x, y) {
 	}
 }
 
-function shanten(s) {
+function calShanten(s) {
 	s = s.toString(2).substring(2).split('')
 	const T = merge(filter(0), filter(1))
 	const D = merge(filter(2), filter(3)).map((x) => (x > 2 ? 9 : x))
@@ -229,13 +229,13 @@ function shanten(s) {
 
 	function merge(x, y) {
 		const n = x.length
-		const z = new Uint8ClampedArray(n)
+		const z = new Int8Array(n)
 		for (let i = 0; i < n; i++) {
 			z[i] = parseInt(x[i] + y[i], 2) + 1
 		}
 		return z
 	}
 	function filter(i) {
-		return s.filter((c, idx) => idx % 4 === i)
+		return s.filter((_c, idx) => idx % 4 === i)
 	}
 }

@@ -48,7 +48,7 @@ if (isMainThread) {
 		} = require('node:fs')
 		const { createGzip } = require('node:zlib')
 		const { pipeline } = require('node:stream')
-		const { shanten } = require('./helper.js')
+		const { calShanten } = require('./helper.js')
 
 		const A = BigUint64Array.from(st).sort()
 		const k = A.length
@@ -64,9 +64,9 @@ if (isMainThread) {
 			}
 		})
 
-		const stn = new Uint8ClampedArray(k)
+		const stn = new Int8Array(k)
 		for (let i = 0; i < k; i++) {
-			stn[i] = shanten(A[i])
+			stn[i] = calShanten(A[i])
 		}
 		writeFileSync('./shanten', stn)
 		src = createReadStream('./shanten')
