@@ -32,7 +32,7 @@ function Area(left, top, width, height) {
 async function getHand(fullscreen) {
 	const buffer = await sharp(fullscreen)
 		.png(options)
-		.extract(new Area(220, 935, 29 + 95 * 14, 137))
+		.extract(new Area(220, 935, 95 * 13, 137))
 		.toBuffer()
 	const hand = []
 	let start = 0
@@ -59,8 +59,8 @@ async function getHand(fullscreen) {
 		for (let i = idx; i < n; i++) {
 			const src = await readImage(img)
 			const templ = await readImage(A[i])
-			const res = await matchTemplate(src, templ)
-			if (res > threshold) {
+			const match = await matchTemplate(src, templ)
+			if (match > threshold) {
 				let tile = A[i].split('/').pop().split('.')[0]
 				tile = Number(tile)
 				return [tile, i]
