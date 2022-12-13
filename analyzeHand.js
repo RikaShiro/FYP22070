@@ -9,9 +9,8 @@ const stnTable = Int8Array.from(readFileSync('./shanten'))
 module.exports = { analyzeHand }
 
 function analyzeHand(hand) {
-	return hand
-
 	assert([14, 11, 8, 5, 2].includes(hand.length))
+	assert(!hand.includes(-1))
 	if (getShanten(hand) === -1) {
 		console.log('win')
 		return

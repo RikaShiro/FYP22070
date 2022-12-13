@@ -9,6 +9,7 @@ const msgType = {
 	res: 3
 }
 
+let i = 0
 class Parser {
 	constructor() {
 		this.root = protobuf.Root.fromJSON(require('./liqi.json'))
@@ -21,22 +22,20 @@ class Parser {
 		if (!'name' in frame.data) return
 		const name = frame.data.name
 		if (name !== 'ActionDealTile') return
-		screenshot({ format: 'png' }).then((img) => {
-			try {
-				const hand = getHand(img)
-				const n = hand.length
-				if (n % 4 === 2) {
-					try {
+		setTimeout(() => {
+			screenshot({ format: 'png' }).then(async (img) => {
+				try {
+					const hand = await getHand(img)
+					const n = hand.length
+					if (n % 4 === 2) {
+						console.log(hand)
 						analyzeHand(hand)
-					} catch (_e) {
-						console.log('analyze hand err')
 					}
+				} catch (e) {
+					console.log('getHand err')
 				}
-			} catch (_e) {
-				console.log('get hand err')
-			}
-			
-		})
+			})
+		}, 750)
 	}
 }
 
