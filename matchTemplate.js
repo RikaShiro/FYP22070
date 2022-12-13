@@ -1,5 +1,3 @@
-module.exports = { matchTemplate }
-
 function loadOpenCV() {
 	if (global.cv) {
 		return Promise.resolve()
@@ -26,3 +24,5 @@ async function matchTemplate(src, templ) {
 	}
 	return max
 }
+
+module.exports = { matchTemplate }

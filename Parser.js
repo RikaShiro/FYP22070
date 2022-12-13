@@ -22,11 +22,20 @@ class Parser {
 		const name = frame.data.name
 		if (name !== 'ActionDealTile') return
 		screenshot({ format: 'png' }).then((img) => {
-			const hand = getHand(img)
-			const n = hand.length
-			if (n % 4 === 2) {
-				analyzeHand(hand)
+			try {
+				const hand = getHand(img)
+				const n = hand.length
+				if (n % 4 === 2) {
+					try {
+						analyzeHand(hand)
+					} catch (_e) {
+						console.log('analyze hand err')
+					}
+				}
+			} catch (_e) {
+				console.log('get hand err')
 			}
+			
 		})
 	}
 }

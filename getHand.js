@@ -16,9 +16,12 @@ for (let i = 1; i <= 7; i++) {
 	A.push(p)
 }
 A.sort()
+	; (async () => {
+	await getHand('./images/sample/001.PNG')
+})()
 module.exports = { getHand }
 
-function Area(left = 0, top = 0, width = 1920, height = 1080) {
+function Area(left, top, width, height) {
 	this.left = left
 	this.top = top
 	this.width = width
@@ -29,7 +32,7 @@ function Area(left = 0, top = 0, width = 1920, height = 1080) {
 async function getHand(fullscreen) {
 	const buffer = await sharp(fullscreen)
 		.png(options)
-		.extract(new Area(220, 935, 95 * 13, 137))
+		.extract(new Area(220, 935, 29 + 95 * 14, 137))
 		.toBuffer()
 	const hand = []
 	let start = 0
@@ -41,12 +44,20 @@ async function getHand(fullscreen) {
 		start = idx
 		hand.push(tile)
 	}
-	return hand
+	// const newTile = await sharp(buffer)
+	// 	.extract(new Area(29 + 95 * hand.length, 0, 95, 137))
+	// 	.toBuffer()
+	// const [tile, _idx] = await getTile(newTile)
+	// if (tile !== -1) {
+	// 	hand.push(tile)
+	// }
+	console.log(hand)
+	return hand.sort()
 
-	async function getTile(buffer, idx = 0) {
+	async function getTile(img, idx = 0) {
 		const n = A.length
 		for (let i = idx; i < n; i++) {
-			const src = await readImage(buffer)
+			const src = await readImage(img)
 			const templ = await readImage(A[i])
 			const res = await matchTemplate(src, templ)
 			if (res > threshold) {

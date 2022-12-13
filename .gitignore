@@ -8,7 +8,5 @@ images/
 opencv.js
 test.js
 enumerations
-liqi.json
-decomposition.json
-permutation.json
-user.json
+*.json
+!package.json
