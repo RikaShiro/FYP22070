@@ -1,6 +1,5 @@
 const sharp = require('sharp')
 const { matchTemplate } = require('./matchTemplate.js')
-const { options } = require('./options.js')
 
 const threshold = 0.85
 const A = []
@@ -16,22 +15,40 @@ for (let i = 1; i <= 7; i++) {
 	A.push(p)
 }
 A.sort()
-	; (async () => {
-	await getHand('./images/sample/001.PNG')
-})()
-module.exports = { getHand }
 
-function Area(left, top, width, height) {
+function Area(left = 0, top = 0, width = 1920, height = 1080) {
 	this.left = left
 	this.top = top
 	this.width = width
 	this.height = height
-	return this
 }
 
-async function getHand(fullscreen) {
+async function getTile(buffer, idx = 0) {
+	const n = A.length
+	for (let i = idx; i < n; i++) {
+		const src = await readImage(buffer)
+		const templ = await readImage(A[i])
+		const res = await matchTemplate(src, templ)
+		if (res > threshold) {
+			let tile = A[i].split('/').pop().split('.')[0]
+			tile = Number(tile)
+			return [tile, i]
+		}
+	}
+	return [-1, 0]
+
+	async function readImage(input) {
+		const { data, info } = await sharp(input)
+			.ensureAlpha()
+			.raw()
+			.toBuffer({ resolveWithObject: true })
+		const { width, height } = info
+		return { data, width, height }
+	}
+}
+
+async function getFullHand(fullscreen) {
 	const buffer = await sharp(fullscreen)
-		.png(options)
 		.extract(new Area(220, 935, 95 * 13, 137))
 		.toBuffer()
 	const hand = []
@@ -44,37 +61,10 @@ async function getHand(fullscreen) {
 		start = idx
 		hand.push(tile)
 	}
-	// const newTile = await sharp(buffer)
-	// 	.extract(new Area(29 + 95 * hand.length, 0, 95, 137))
-	// 	.toBuffer()
-	// const [tile, _idx] = await getTile(newTile)
-	// if (tile !== -1) {
-	// 	hand.push(tile)
-	// }
-	console.log(hand)
-	return hand.sort()
-
-	async function getTile(img, idx = 0) {
-		const n = A.length
-		for (let i = idx; i < n; i++) {
-			const src = await readImage(img)
-			const templ = await readImage(A[i])
-			const match = await matchTemplate(src, templ)
-			if (match > threshold) {
-				let tile = A[i].split('/').pop().split('.')[0]
-				tile = Number(tile)
-				return [tile, i]
-			}
-		}
-		return [-1, 0]
-
-		async function readImage(input) {
-			const { data, info } = await sharp(input)
-				.ensureAlpha()
-				.raw()
-				.toBuffer({ resolveWithObject: true })
-			const { width, height } = info
-			return { data, width, height }
-		}
-	}
+	return hand
 }
+
+;(async () => {
+	const hand = await getFullHand('./images/sample/001.PNG')
+	console.log(hand)
+})()
