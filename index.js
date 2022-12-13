@@ -1,8 +1,5 @@
 const Proxy = require('http-mitm-proxy')
-const Parser = require('./SimpleParser.js')
-const { preprocess } = require('./preprocess.js')
-
-preprocess('./images')
+const Parser = require('./Parser.js')
 
 const proxy = Proxy()
 const parser = new Parser()

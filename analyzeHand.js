@@ -1,41 +1,49 @@
-const { hand2int } = require('./helper')
 const { readFileSync } = require('node:fs')
 const { assert } = require('node:console')
+const { hand2int } = require('./helper')
 
 let E = readFileSync('./enumerations')
 E = Uint8Array.from(E)
 E = new BigUint64Array(E.buffer)
 const stnTable = Int8Array.from(readFileSync('./shanten'))
-console.log(analyzeHand([11, 11, 11, 31, 32, 33, 34, 35, 36, 36, 36, 71, 72, 73]))
+module.exports = { analyzeHand }
 
 function analyzeHand(hand) {
+	assert(E && stnTable)
 	assert([14, 11, 8, 5, 2].includes(hand.length))
+	if (getShanten(hand) === -1) {
+		console.log('win')
+		return
+	}
+
 	const yama = new Yama().remove(hand)
 	const allTiles = getAllTiles()
 	const st = new Set(hand)
 
 	let recommendation = null
-	let [min, minCount] = [Infinity, 0]
+	let [globalMin, globalDraw] = [Infinity, 0]
 	for (const i of st.values()) {
-		const [stn, stnCount] = analyze(i)
-		if (stn < min) {
-			min = stn
-			minCount = stnCount
-			recommendation = [i]
-		} else if (stn === min) {
-			if (stnCount < minCount) {
-				minCount = stnCount
-				recommendation = [i]
-			} else if (stnCount === minCount) {
-				recommendation.push(i)
+		const [localMin, localDraw] = analyze(i)
+		if (localMin < globalMin) {
+			globalMin = localMin
+			globalDraw = localDraw
+			recommendation = {}
+			recommendation[i] = localDraw
+		} else if (localMin === globalMin) {
+			if (localDraw.length > globalDraw.length) {
+				globalDraw = localDraw
+				recommendation = {}
+				recommendation[i] = localDraw
+			} else if (localDraw.length === globalDraw.length) {
+				recommendation[i] = localDraw
 			}
 		}
 	}
-	return recommendation
-	
+	parseRecommendation(recommendation, globalMin)
+
 	function analyze(tile) {
 		const available = allTiles.filter((x) => {
-			return x !== tile && yama[x] > 0	
+			return x !== tile && yama[x] > 0
 		})
 		const stn = {}
 		for (const i of available) {
@@ -46,13 +54,13 @@ function analyzeHand(hand) {
 			stn[i] = getShanten(A)
 		}
 		const min = Math.min(...Object.values(stn))
-		let minCount = 0
-		for (const [_k, v] of Object.entries(stn)) {
+		let nextDraw = []
+		for (const [k, v] of Object.entries(stn)) {
 			if (v === min) {
-				minCount ++
+				nextDraw.push(k)
 			}
 		}
-		return [min, minCount]
+		return [min, nextDraw]
 	}
 
 	function getShanten(A) {
@@ -106,6 +114,12 @@ function analyzeHand(hand) {
 		}
 		return A
 	}
-}
 
-module.exports = { analyzeHand }
+	function parseRecommendation(r, min) {
+		console.log(`next round min STN: ${min}`)
+		for (const [k, v] of Object.entries(r)) {
+			const s = `discard ${k}; pick ${v.join(' ')}`
+			console.log(s)
+		}
+	}
+}
