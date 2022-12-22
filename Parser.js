@@ -9,7 +9,6 @@ const msgType = {
 	res: 3
 }
 
-let i = 0
 class Parser {
 	constructor() {
 		this.root = protobuf.Root.fromJSON(require('./liqi.json'))
@@ -31,7 +30,7 @@ class Parser {
 						console.log(hand)
 						analyzeHand(hand)
 					}
-				} catch (e) {
+				} catch (_e) {
 					console.log('getHand err')
 				}
 			})
