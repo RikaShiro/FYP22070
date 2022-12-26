@@ -2,13 +2,14 @@ const { readFileSync } = require('node:fs')
 const { assert } = require('node:console')
 const { hand2int } = require('./helper')
 
+// E = enumerations
 let E = readFileSync('./enumerations')
 E = Uint8Array.from(E)
 E = new BigUint64Array(E.buffer)
-const stnTable = Int8Array.from(readFileSync('./shanten'))
-module.exports = { analyzeHand }
+// STNT = shanten number table
+const STNT = Int8Array.from(readFileSync('./shanten'))
+module.exports = { analyzeHand, getShanten }
 
-analyzeHand([11, 11, 12, 12, 13, 13, 14, 14, 71, 71, 73, 73, 73, 73])
 function analyzeHand(hand) {
 	assert([14, 11, 8, 5, 2].includes(hand.length))
 	assert(!hand.includes(-1))
@@ -39,7 +40,7 @@ function analyzeHand(hand) {
 
 	let r = []
 	let globalMin = Infinity
-	let globalDraw = 0
+	let globalDraw = []
 	for (const i of st.values()) {
 		const [localMin, localDraw] = substitute(i)
 		if (localMin < globalMin) {
@@ -84,8 +85,6 @@ function analyzeHand(hand) {
 		return s
 
 		function getShanten7() {
-			// 七対子のシャンテン数 = 6 − トイツ数
-			// ただし牌の種類が7未満の場合はさらに(7 - 牌の種類)を引く
 			let count = 0
 			for (const [_tile, num] of A) {
 				if (num >= 2) {
@@ -100,6 +99,7 @@ function analyzeHand(hand) {
 			return stn
 		}
 	}
+	
 	function analyze13(A) {
 		// if already win
 		const stn14 = getShanten13()
@@ -125,8 +125,6 @@ function analyzeHand(hand) {
 		return s
 
 		function getShanten13() {
-			// 国士無双のシャンテン数 = 13 − 一九字牌の種類数
-			// ただし一九字牌のトイツがある場合はさらに1を引く
 			const yaochuu = [11, 19, 31, 39, 51, 59, 71, 72, 73, 74, 75, 76, 77]
 			let pair = false
 			let count = 0
@@ -168,27 +166,6 @@ function analyzeHand(hand) {
 		return [min, nextDraw]
 	}
 
-	function getShanten(A) {
-		const x = hand2int(A)
-		const i = binarySearch(x)
-		return stnTable[i]
-
-		function binarySearch(x) {
-			let [low, high] = [0, E.length]
-			while (low < high) {
-				const mid = Math.floor((low + high) / 2)
-				if (E[mid] > x) {
-					high = mid - 1
-				} else if (E[mid] < x) {
-					low = mid + 1
-				} else {
-					return mid
-				}
-			}
-			return low
-		}
-	}
-
 	function Yama() {
 		for (let i = 1; i < 10; i++) {
 			for (const j of [10, 30, 50]) {
@@ -227,5 +204,26 @@ function analyzeHand(hand) {
 			const s = `discard ${k}; pick ${v.join(' ')}`
 			console.log(s)
 		}
+	}
+}
+
+function getShanten(A) {
+	const x = hand2int(A)
+	const i = binarySearch(x)
+	return STNT[i]
+
+	function binarySearch(x) {
+		let [low, high] = [0, E.length - 1]
+		while (low <= high) {
+			const mid = Math.floor((low + high) / 2)
+			if (E[mid] > x) {
+				high = mid - 1
+			} else if (E[mid] < x) {
+				low = mid + 1
+			} else {
+				return mid
+			}
+		}
+		console.error('invalid shanten number index')
 	}
 }

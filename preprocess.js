@@ -53,19 +53,19 @@ if (isMainThread) {
 		const A = BigUint64Array.from(st).sort()
 		const k = A.length
 		assert(k === 1292059)
-		saveAndZip('./enumerations', A)
+		saveAndZip('enumerations', A)
 		const stn = new Int8Array(k)
 		for (let i = 0; i < k; i++) {
 			stn[i] = calShanten(A[i])
 		}
-		saveAndZip('./shanten', stn)
+		saveAndZip('shanten', stn)
 		console.timeEnd()
 
 		function saveAndZip(path, buffer) {
-			writeFileSync(path, buffer)
+			writeFileSync(`./${path}`, buffer)
 			const gzip = createGzip()
 			const src = createReadStream(path)
-			const dst = createWriteStream(path + '.gz')
+			const dst = createWriteStream(`./gzip/${path}.gz`)
 			pipeline(src, gzip, dst, (err) => {
 				if (err) {
 					console.error('zip error: ', err)

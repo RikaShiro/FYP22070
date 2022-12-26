@@ -14,7 +14,6 @@ for (let i = 1; i <= 7; i++) {
 	A.push(`./images/tiles/${70 + i}.PNG`)
 }
 A.sort()
-
 module.exports = { getHand }
 
 async function getHand(fullscreen) {

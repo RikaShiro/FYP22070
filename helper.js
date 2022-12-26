@@ -1,9 +1,9 @@
 module.exports = { getPermutations, insert, hand2int, calShanten }
 
 function getPermutations() {
-	const decomposition = []
+	let decomposition = []
 	for (const n of [14, 11, 8, 5, 2]) {
-		decomposition.push(...decompose(n))
+		decomposition = decomposition.concat(decompose(n))
 	}
 	const permutation = decomposition.flatMap((x) => permute(x))
 	return permutation
@@ -235,6 +235,7 @@ function calShanten(s) {
 		}
 		return z
 	}
+	
 	function filter(i) {
 		return s.filter((_c, idx) => idx % 4 === i)
 	}

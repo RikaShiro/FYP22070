@@ -30,8 +30,8 @@ class Parser {
 						console.log(hand)
 						analyzeHand(hand)
 					}
-				} catch (_e) {
-					console.log('getHand err')
+				} catch (e) {
+					console.error('getHand err')
 				}
 			})
 		}, 750)
