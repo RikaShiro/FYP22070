@@ -6,8 +6,17 @@ const { hand2int } = require('./helper')
 let E = readFileSync('./enumerations')
 E = Uint8Array.from(E)
 E = new BigUint64Array(E.buffer)
+// STN = shanten number
+let STN = Int8Array.from(readFileSync('./shanten'))
+const n = STN.length
 // STNT = shanten number table
-const STNT = Int8Array.from(readFileSync('./shanten'))
+const STNT = new Map()
+for (let i = 0; i < n; i++) {
+	STNT.set(E[i], STN[i])
+}
+E = null
+STN = null
+// analyzeHand([11, 11, 11, 12, 13, 31, 32, 33, 34, 35, 37, 71, 71, 71])
 module.exports = { analyzeHand, getShanten }
 
 function analyzeHand(hand) {
@@ -99,7 +108,7 @@ function analyzeHand(hand) {
 			return stn
 		}
 	}
-	
+
 	function analyze13(A) {
 		// if already win
 		const stn14 = getShanten13()
@@ -208,22 +217,5 @@ function analyzeHand(hand) {
 }
 
 function getShanten(A) {
-	const x = hand2int(A)
-	const i = binarySearch(x)
-	return STNT[i]
-
-	function binarySearch(x) {
-		let [low, high] = [0, E.length - 1]
-		while (low <= high) {
-			const mid = Math.floor((low + high) / 2)
-			if (E[mid] > x) {
-				high = mid - 1
-			} else if (E[mid] < x) {
-				low = mid + 1
-			} else {
-				return mid
-			}
-		}
-		console.error('invalid shanten number index')
-	}
+	return STNT.get(hand2int(A))
 }
