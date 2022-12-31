@@ -8,5 +8,6 @@ images/
 opencv.js
 test.js
 enumerations
+shanten
 *.json
 !package.json
