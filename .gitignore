@@ -4,7 +4,7 @@ node_modules
 game-log
 images/
 !images/tiles
-.history
+.history/
 
 opencv.js
 test.js

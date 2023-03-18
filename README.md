@@ -1,5 +1,10 @@
 # Instructions
 
+Please run this project under the latest LTS version of Node.js.  
+Date: 2023/03/18  
+Latest: 18.15.0  
+Use of NVM for Node version control is recommended.
+
 ## Installation
 
 Chinese users will probably get error when downloading "Sharp" package.  

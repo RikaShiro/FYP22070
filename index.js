@@ -1,3 +1,4 @@
+require('./initialize.js')
 const Proxy = require('http-mitm-proxy')
 const Parser = require('./Parser.js')
 

@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "http-mitm-proxy": "^0.9.0",
-    "protobufjs": "^7.1.2",
+    "http-mitm-proxy": "^1.0.0",
+    "protobufjs": "^7.2.2",
     "screenshot-desktop": "^1.12.7",
-    "sharp": "^0.31.2"
+    "sharp": "^0.31.3"
   },
   "name": "fyp22070",
   "version": "1.0.0",
