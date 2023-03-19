@@ -25,10 +25,11 @@ npm install
 
 ## Preprocess
 
+2 Tables are required: 'shanten' and 'enumerations'.  
 There are 2 options to set up the project before actually serving.  
 
-1. Unzip pre-downloaded files to get the necessary resources.  
-2. Compute the resources on your own, which takes around 3 minutes.  
+1. Unzip the pre-downloaded tables.  
+2. Compute the tables your own, which takes around 2 minutes (CPU multi-threading).  
 
 ## Serve
 
