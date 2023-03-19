@@ -6,7 +6,8 @@ const {
 } = require('node:worker_threads')
 
 if (isMainThread) {
-	console.time()
+	console.log('Calculating resources ...\nIt takes around 2 minutes\nPlease do not exit')
+	console.time('Calculate Resources')
 	const assert = require('node:assert')
 	const { getPermutations } = require('./helper.js')
 
@@ -19,6 +20,7 @@ if (isMainThread) {
 	const n = splitWork.length
 	let count = 0
 	const st = new Set()
+	console.time('Enumerations')
 	for (let i = 1; i < n; i++) {
 		assign(splitWork[i - 1], splitWork[i])
 	}
@@ -30,6 +32,7 @@ if (isMainThread) {
 			if (msg === 'done') {
 				count++
 				if (count === n - 1) {
+					console.timeEnd('Enumerations')
 					generateTable()
 				}
 			} else {
@@ -41,10 +44,13 @@ if (isMainThread) {
 	}
 
 	function generateTable() {
+		console.time('Shanten Number')
 		const {
 			writeFileSync,
 			createReadStream,
-			createWriteStream
+			createWriteStream,
+			existsSync,
+			mkdirSync
 		} = require('node:fs')
 		const { createGzip } = require('node:zlib')
 		const { pipeline } = require('node:stream')
@@ -59,9 +65,13 @@ if (isMainThread) {
 			stn[i] = calShanten(A[i])
 		}
 		saveAndZip('shanten', stn)
-		console.timeEnd()
+		console.timeEnd('Shanten Number')
+		console.timeEnd('Calculate Resources')
 
 		function saveAndZip(path, buffer) {
+			if (!existsSync('./gzip')) {
+				mkdirSync('./gzip')
+			}
 			writeFileSync(`./${path}`, buffer)
 			const gzip = createGzip()
 			const src = createReadStream(path)
