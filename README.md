@@ -31,6 +31,12 @@ There are 2 options to set up the project before actually serving.
 1. Unzip the pre-downloaded tables.  
 2. Compute the tables your own, which takes around 2 minutes (CPU multi-threading).  
 
+## OpenCV
+
+This project makes use of opencv.js.  
+The official copy is available at https://docs.opencv.org/${version}/opencv.js  
+Currently, version 4.7.0 is attached.  
+
 ## Serve
 
 ```text
