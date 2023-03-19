@@ -1,8 +1,8 @@
 require('./initialize.js')
-const Proxy = require('http-mitm-proxy')
+const Proxy = require('http-mitm-proxy').Proxy
 const Parser = require('./Parser.js')
 
-const proxy = Proxy()
+const proxy = new Proxy()
 const parser = new Parser()
 proxy.onWebSocketFrame((_ctx, _type, fromServer, data, flags, callback) => {
 	if (fromServer) {
