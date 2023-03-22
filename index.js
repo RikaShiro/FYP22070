@@ -1,4 +1,3 @@
-require('./initialize.js')
 require('dotenv').config()
 const Proxy = require('http-mitm-proxy').Proxy
 const Parser = require('./Parser.js')
@@ -12,5 +11,5 @@ proxy.onWebSocketFrame((_ctx, _type, fromServer, data, flags, callback) => {
 	}
 	return callback(null, data, flags)
 })
-proxy.listen({ port: 33333 })
+proxy.listen({ port })
 console.log(`Serve at port ${port}`)

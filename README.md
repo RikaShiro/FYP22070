@@ -1,11 +1,12 @@
 # Instructions
 
-Please run this project under the latest LTS version of Node.js.  
-Date: 2023/03/18  
-Latest: 18.15.0  
+Please run this project under the latest 16.X.X LTS version of Node.js.  
+Due to the limitation of Node package "http-mitm-proxy", Node version should not be later than 16.  
+Date: 2023/03/22  
+Latest: 16.19.1  
 Use of NVM for Node version control is recommended.
 
-## Install
+## Installation
 
 Chinese users will probably get error when downloading "Sharp" package.  
 Set Chinese mirror hosted at Alibaba for "Sharp" before install node packages.  
@@ -23,9 +24,13 @@ For international users, run:
 npm install
 ```
 
-## Preprocess
+## Preparation
 
 ### 1. Tables
+
+```text
+npm run init
+```
 
 2 Tables are required: 'shanten' and 'enumerations'.  
 There are 2 options to set up the project before actually serving.  
@@ -44,6 +49,17 @@ Currently, version 4.7.0 is attached.
 liqi.json defines the actions at maj-soul.com.  
 It is necessary for websocket messages decode, since the game uses protobuf to exchange information.  
 This file can be obtained during user login, and should be updated together with the web game client.  
+
+### 4. http-mitm-proxy
+
+The command line
+
+```text
+node index.js
+```
+
+opens up a local proxy server that listens to port 22070. Besides, you have to turn on proxy in your OS setting. For Windows, please config the proxy manually in "proxy setting", for address "127.0.0.1" and port "22070". The port can be changed in ".env" file.  
+At the first time you run the project, it is necessary to trust the certificate of http-mitm-proxy. The certificate path is ./.http-mitm-proxy/certs/ca.pem
 
 ## Serve
 
