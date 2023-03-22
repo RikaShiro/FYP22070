@@ -1,6 +1,6 @@
 const { readFileSync } = require('node:fs')
 const { assert } = require('node:console')
-const { hand2int } = require('./helper')
+const { hand2int } = require('./helper.js')
 
 // E = enumerations
 let E = readFileSync('./enumerations')
