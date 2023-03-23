@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ debug: false })
 const Proxy = require('http-mitm-proxy').Proxy
 const Parser = require('./Parser.js')
 
@@ -11,5 +11,5 @@ proxy.onWebSocketFrame((_ctx, _type, fromServer, data, flags, callback) => {
 	}
 	return callback(null, data, flags)
 })
-proxy.listen({ port })
+proxy.listen({ slient: true, port })
 console.log(`Serve at port ${port}`)
