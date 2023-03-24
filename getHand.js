@@ -1,7 +1,8 @@
+require('dotenv').config()
 const sharp = require('sharp')
 const { matchTemplate } = require('./matchTemplate.js')
-const { options } = require('./options.js')
 
+const options = JSON.parse(process.env.imageOptions)
 const threshold = 0.85
 const A = []
 // ignore aka dora
