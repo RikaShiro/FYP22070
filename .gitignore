@@ -2,12 +2,11 @@ node_modules
 .http-mitm-proxy
 .ipynb_checkpoints
 game-log
-images/
-!images/tiles
 .history/
-
 test.js
 enumerations
 shanten
 *.json
 !package.json
+
+extension/.history/

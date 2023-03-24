@@ -1,0 +1,35 @@
+progresses
+1. calculate shanten number for 3k+2 tiles (2, 5, 8, 11, 14)
+there are 1292059 cases in total
+an implementation of zhihu article https://zhuanlan.zhihu.com/p/31000381
+why calculate shanten number for 14 instead of 13?
+-- it helps to give recommendations. if calculate 4k+1 shanten number instead, it's hard to suggest next draw
+
+2.  integrate shanten number and websocket
+
+todo
+1. recognize dora indicator
+2. recognize chiponkang?
+3. find a proper threshold. 0.85 seems a little bit too high.
+sometimes it fails to recognize the tiles
+4. special cases for 7 pairs and 13 orphans 
+
+toubles
+1. how to determine the setTimeout delay when getting screenshot
+we listen to websocket messages and do something when "ActionDealTile" is received
+when we have 14 tiles in hand, we call the parser to calculate the shanten number
+the time may be diff on diff devices
+or even diff when CPU is occupied by other processes (idk)
+
+2. cannot differentiate 5 man/pin/sou and aka dora 5 man/pin/sou
+since template matching method is using grayscale.
+idk if it works for colored pictures
+
+3. it's hard to recognize discarded tiles because they are not arranged neatly
+
+4. works only in 1920*1080 resolution
+
+11-19 1-9man
+31-39 1-9pin
+51-59 1-9sou
+71-77 ton nan sha pei white red zhong
