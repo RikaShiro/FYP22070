@@ -8,7 +8,7 @@ Use of NVM for Node version control is recommended.
 
 ## Download
 
-This project contains too much historical data that do not contribute to current functions.
+This project contains too much historical data that do not contribute to current functions.  
 To faster the download process, please run:
 
 ```text
@@ -50,7 +50,7 @@ There are 2 options to set up the project before actually serving.
 ### 2. opencv.js
 
 This project makes use of opencv.js.  
-The official copy is available at https://docs.opencv.org/${version}/opencv.js  
+The official copy is available at <https://docs.opencv.org/${version}/opencv.js>  
 Currently, version 4.7.0 is attached.  
 
 ### 3. liqi.json
@@ -61,14 +61,14 @@ This file can be obtained during user login, and should be updated together with
 
 ### 4. http-mitm-proxy
 
-The command line
-
 ```text
 node index.js
 ```
 
-opens up a local proxy server that listens to port 22070. Besides, you have to turn on proxy in your OS setting. For Windows, please config the proxy manually in "proxy setting", for address "127.0.0.1" and port "22070". The port can be changed in ".env" file.  
-At the first time you run the project, it is necessary to trust the certificate of http-mitm-proxy. The certificate path is ./.http-mitm-proxy/certs/ca.pem
+The command opens up a local proxy server that listens to port 22070. Besides, you have to turn on proxy in your OS setting.  
+For Windows, please config the proxy manually in "proxy setting", for address "127.0.0.1" and port "22070". The port can be changed in ".env" file.  
+At the first time you run the project, it is necessary to trust the certificate of http-mitm-proxy.  
+The certificate path is by default ./.http-mitm-proxy/certs/ca.pem  
 
 ## Serve
 
