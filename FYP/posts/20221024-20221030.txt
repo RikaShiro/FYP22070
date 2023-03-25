@@ -26,3 +26,5 @@ notify type can almost fulfill our requirements. but without 1 thing: player id
 	best solution：decode things in .lq.lobby
 	or：force the user start an AI game first
 5. start FYP webpage (wordpress)
+
+https://hku.zoom.us/j/95167174231?pwd=THF3S2tMNmw2WWJYMGx6MThlUS8zUT09

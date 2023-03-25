@@ -6,7 +6,16 @@ Date: 2023/03/22
 Latest: 16.19.1  
 Use of NVM for Node version control is recommended.
 
-## Installation
+## Download
+
+This project contains too much historical data that do not contribute to current functions.
+To faster the download process, please run:
+
+```text
+git clone git@github.com:RikaShiro/FYP22070.git --depth=1
+```
+
+## Install
 
 Chinese users will probably get error when downloading "Sharp" package.  
 Set Chinese mirror hosted at Alibaba for "Sharp" before install node packages.  
@@ -24,7 +33,7 @@ For international users, run:
 npm install
 ```
 
-## Preparation
+## Prepare
 
 ### 1. Tables
 

@@ -11,5 +11,5 @@ proxy.onWebSocketFrame((_ctx, _type, fromServer, data, flags, callback) => {
 	}
 	return callback(null, data, flags)
 })
-proxy.listen({ slient: true, port })
+proxy.listen({ port })
 console.log(`Serve at port ${port}`)
