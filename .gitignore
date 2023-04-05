@@ -8,5 +8,6 @@ enumerations
 shanten
 *.json
 !package.json
+.http
 
 extension/.history/

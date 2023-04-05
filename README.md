@@ -57,7 +57,7 @@ Currently, version 4.7.0 is attached.
 
 liqi.json defines the actions at maj-soul.com.  
 It is necessary for websocket messages decode, since the game uses protobuf to exchange information.  
-This file can be obtained during user login, and should be updated together with the web game client.  
+This file can be obtained during user login, and should be updated together with the web game client.
 
 ### 4. http-mitm-proxy
 
@@ -65,10 +65,8 @@ This file can be obtained during user login, and should be updated together with
 node index.js
 ```
 
-The command opens up a local proxy server that listens to port 22070. Besides, you have to turn on proxy in your OS setting.  
-For Windows, please config the proxy manually in "proxy setting", for address "127.0.0.1" and port "22070". The port can be changed in ".env" file.  
-At the first time you run the project, it is necessary to trust the certificate of http-mitm-proxy.  
-The certificate path is by default ./.http-mitm-proxy/certs/ca.pem  
+The command opens up a local proxy server that listens to port 22070. Besides, you have to turn on proxy in your OS setting. For Windows, please config the proxy manually in "proxy setting", for address "127.0.0.1" and port "22070".  
+At the first time you run the project, it is necessary to trust the certificate of http-mitm-proxy. The certificate path is by default ./.http-mitm-proxy/certs/ca.pem
 
 ## Serve
 
@@ -76,4 +74,4 @@ The certificate path is by default ./.http-mitm-proxy/certs/ca.pem
 npm run serve
 ```
 
-It initializes the script and run the proxy on port 22070.  
+It initializes the script and run the proxy on port 22070. The port can be changed in ".env" file.
