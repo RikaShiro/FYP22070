@@ -6,8 +6,9 @@ game-log
 test.js
 enumerations
 shanten
-*.json
-!package.json
 .http
 
+!package.json
+
+shanten.json
 extension/.history/

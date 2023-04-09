@@ -1,13 +1,17 @@
 // chrome.runtime.onInstalled.addListener(() => {
-// 	chrome.action.setBadgeText({
-// 		text: 'OFF'
-// 	})
+// 	fetch('http://127.0.0.1:22071')
+// 		.then((res) => res.text())
+// 		.then((_res) => {
+// 			chrome.extension.getBackgroundPage().console.log('Testing')
+// 			console.log('abc')
+// 		})
 // })
 
-chrome.action.onClicked.addListener(() => {
-  fetch('http://127.0.0.1:22071')
-	.then((res) => res.text())
-	.then((res) => {
-		console.log(res)
-	})
-})
+// chrome.runtime.onMessage.addListener(() => {
+// 	fetch('http://127.0.0.1:22071')
+// 		.then((res) => res.text())
+// 		.then((_res) => {
+// 			chrome.extension.getBackgroundPage().console.log('Testing')
+// 			console.log('abc')
+// 		})
+// })

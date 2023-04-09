@@ -1,4 +1,6 @@
 require('dotenv').config({ debug: false })
+const http = require('node:http')
+const { existsSync } = require('node:fs')
 const Proxy = require('http-mitm-proxy').Proxy
 const Parser = require('./Parser.js')
 
@@ -14,14 +16,23 @@ proxy.onWebSocketFrame((_ctx, _type, fromServer, data, flags, callback) => {
 proxy.listen({ port: mitmPort }, () => {
 	console.log(`proxy set up at port ${mitmPort}`)
 })
-
-const localhost = '127.0.0.1'
-const http = require('node:http')
 http
-	.createServer((_req, res) => {
-		res.writeHead(200)
-		res.end()
+	.createServer((req, res) => {
+		if (existsSync('./shanten.json')) {
+			// console.log(req.headers.host)
+			const msg = JSON.stringify(require('./shanten.json'))
+			res
+				.writeHead(200, {
+					'Content-Length': Buffer.byteLength(msg),
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Methods': 'GET'
+				})
+				.end(msg)
+		} else {
+			res.writeHead(304).end()
+		}
 	})
-	.listen(serverPort, localhost, () => {
+	.listen(serverPort, '127.0.0.1', () => {
 		console.log(`server set up at port ${serverPort}`)
 	})

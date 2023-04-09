@@ -1,4 +1,4 @@
-const { readFileSync } = require('node:fs')
+const { readFileSync, writeFileSync } = require('node:fs')
 const { assert } = require('node:console')
 const { hand2int } = require('./helper.js')
 
@@ -26,6 +26,10 @@ function analyzeHand(hand) {
 		console.log('win')
 		return
 	}
+	const yama = new Yama().remove(hand)
+	const allTiles = getAllTiles()
+	const st = new Set(hand)
+
 	if (hand.length === 14) {
 		const M = new Map()
 		for (const i of hand) {
@@ -43,11 +47,7 @@ function analyzeHand(hand) {
 		}
 	}
 
-	const yama = new Yama().remove(hand)
-	const allTiles = getAllTiles()
-	const st = new Set(hand)
-
-	let r = []
+	let r = {}
 	let globalMin = Infinity
 	let globalDraw = []
 	for (const i of st.values()) {
@@ -68,6 +68,7 @@ function analyzeHand(hand) {
 		}
 	}
 	parse(r, globalMin)
+	writeFileSync('shanten.json', JSON.stringify(r))
 
 	function analyze7(A) {
 		// if already win
