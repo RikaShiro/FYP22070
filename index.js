@@ -17,9 +17,8 @@ proxy.listen({ port: mitmPort }, () => {
 	console.log(`proxy set up at port ${mitmPort}`)
 })
 http
-	.createServer((req, res) => {
+	.createServer((_req, res) => {
 		if (existsSync('./shanten.json')) {
-			// console.log(req.headers.host)
 			const msg = JSON.stringify(require('./shanten.json'))
 			res
 				.writeHead(200, {

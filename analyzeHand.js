@@ -1,7 +1,9 @@
+require('dotenv').config()
 const { readFileSync, writeFileSync } = require('node:fs')
 const { assert } = require('node:console')
 const { hand2int } = require('./helper.js')
 
+const DEBUG = process.env.DEBUG === 'true'
 // E = enumerations
 let E = readFileSync('./enumerations')
 E = Uint8Array.from(E)
@@ -17,36 +19,21 @@ for (let i = 0; i < n; i++) {
 E = null
 STN = null
 // analyzeHand([11, 11, 11, 12, 13, 31, 32, 33, 34, 35, 37, 71, 71, 71])
+// analyzeHand([11, 11, 11, 12, 12, 31, 31, 33, 33, 35, 37, 71, 71, 71])
 module.exports = { analyzeHand, getShanten }
 
 function analyzeHand(hand) {
 	assert([14, 11, 8, 5, 2].includes(hand.length))
 	assert(!hand.includes(-1))
 	if (getShanten(hand) === -1) {
-		console.log('win')
+		writeEmptyMsg()
 		return
 	}
 	const yama = new Yama().remove(hand)
 	const allTiles = getAllTiles()
 	const st = new Set(hand)
 
-	if (hand.length === 14) {
-		const M = new Map()
-		for (const i of hand) {
-			const j = 1 + (M.has(i) ? M.get(i) : 0)
-			M.set(i, j)
-		}
-		const A = Array.from(M.entries())
-		const r7 = analyze7(A)
-		const r13 = analyze13(A)
-		if (r7 === true || r13 === true) {
-			console.log('win')
-			return
-		} else {
-			console.log(`${r7}\n${r13}`)
-		}
-	}
-
+	// normal
 	let r = {}
 	let globalMin = Infinity
 	let globalDraw = []
@@ -67,8 +54,40 @@ function analyzeHand(hand) {
 			}
 		}
 	}
-	parse(r, globalMin)
-	writeFileSync('shanten.json', JSON.stringify(r))
+	if (DEBUG) {
+		parse(r, globalMin)
+	}
+	let ans = {
+		mode: 1,
+		min: globalMin + 1,
+		discard: r
+	}
+
+	// 13 orphans & 7 pairs can only be concealed hand
+	if (hand.length === 14) {
+		const M = new Map()
+		for (const i of hand) {
+			const j = 1 + (M.has(i) ? M.get(i) : 0)
+			M.set(i, j)
+		}
+		const A = Array.from(M.entries())
+		const r7 = analyze7(A)
+		if (r7 === true) {
+			writeEmptyMsg()
+			return
+		} else {
+			compare(r7, 7)
+		}
+		const r13 = analyze13(A, M)
+		if (r13 === true) {
+			writeEmptyMsg()
+			return
+		} else {
+			compare(r13, 13)
+		}
+	}
+	console.log(ans)
+	writeFileSync('shanten.json', JSON.stringify(ans))
 
 	function analyze7(A) {
 		// if already win
@@ -91,18 +110,27 @@ function analyzeHand(hand) {
 			}
 			A[i][1]++
 		}
-		const s = `7 pairs STN: ${min}\ndiscard ${r.join(' ')}`
-		return s
+		if (DEBUG) {
+			console.log(`7 pairs STN: ${min}\ndiscard ${r.join(' ')}`)
+		}
+		const draw = A.filter((x) => x[1] <= 1).map((x) => x[0].toString())
+		const discard = {}
+		for (const x of r) {
+			discard[x] = draw
+		}
+		return { min, discard }
 
 		function getShanten7() {
-			let count = 0
+			let [count, types] = [0, 0]
 			for (const [_tile, num] of A) {
-				if (num >= 2) {
-					count++
+				if (num > 0) {
+					types++
+					if (num >= 2) {
+						count++
+					}
 				}
 			}
 			let stn = 6 - count
-			const types = A.length
 			if (types < 7) {
 				stn += 7 - types
 			}
@@ -110,7 +138,7 @@ function analyzeHand(hand) {
 		}
 	}
 
-	function analyze13(A) {
+	function analyze13(A, M) {
 		// if already win
 		const stn14 = getShanten13()
 		if (stn14 === -1) {
@@ -131,8 +159,23 @@ function analyzeHand(hand) {
 			}
 			A[i][1]++
 		}
-		const s = `13 orphans STN: ${min}\ndiscard ${r.join(' ')}`
-		return s
+		if (DEBUG) {
+			console.log(`13 orphans STN: ${min}\ndiscard ${r.join(' ')}`)
+		}
+		const draw = [11, 19, 31, 39, 51, 59, 71, 72, 73, 74, 75, 76, 77]
+			.filter((x) => {
+				if (M.has(x)) {
+					return M.get(x) === 1
+				} else {
+					return true
+				}
+			})
+			.map((x) => x.toString())
+		const discard = {}
+		for (const x of r) {
+			discard[x] = draw
+		}
+		return { min, discard }
 
 		function getShanten13() {
 			const yaochuu = [11, 19, 31, 39, 51, 59, 71, 72, 73, 74, 75, 76, 77]
@@ -213,6 +256,20 @@ function analyzeHand(hand) {
 		for (const [k, v] of Object.entries(r)) {
 			const s = `discard ${k}; pick ${v.join(' ')}`
 			console.log(s)
+		}
+	}
+
+	function writeEmptyMsg() {
+		console.log('win')
+		writeFileSync('./res.json', JSON.stringify({}))
+	}
+
+	function compare({ min, discard } = r, mode) {
+		if (min < ans.min) {
+			ans = { mode, min, discard }
+		} else if (min === ans.min) {
+			ans.mode += mode
+			Object.assign(ans.discard, discard)
 		}
 	}
 }
