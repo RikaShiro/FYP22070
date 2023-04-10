@@ -8,11 +8,11 @@ const A = []
 // ignore aka dora
 for (let i = 1; i <= 9; i++) {
 	for (const j of [10, 30, 50]) {
-		A.push(`./images/tiles/${j + i}.PNG`)
+		A.push(`./extension/images/tiles/${j + i}.PNG`)
 	}
 }
 for (let i = 1; i <= 7; i++) {
-	A.push(`./images/tiles/${70 + i}.PNG`)
+	A.push(`./extension/images/tiles/${70 + i}.PNG`)
 }
 A.sort()
 module.exports = { getHand }
@@ -37,11 +37,8 @@ async function getHand(fullscreen) {
 	const img = await sharp(buffer)
 		.extract(new Area(29 + 95 * hand.length, 0, 95, 137))
 		.toBuffer()
-	const [tile, _idx] = await getTile(img)
-	if (tile !== -1) {
-		hand.push(tile)
-	}
-	return hand.sort()
+	const [newTile, _idx] = await getTile(img)
+	return [hand, newTile]
 
 	function Area(left, top, width, height) {
 		this.left = left

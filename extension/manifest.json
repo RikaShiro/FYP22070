@@ -3,14 +3,13 @@
   "name": "test http request",
   "version": "1.0",
   "icons": {
-    "16": "images/icon-16.png",
-    "32": "images/icon-32.png",
-    "48": "images/icon-48.png",
-    "128": "images/icon-128.png"
+    "16": "images/icons/16.PNG",
+    "32": "images/icons/32.PNG",
+    "48": "images/icons/48.PNG",
+    "128": "images/icons/128.PNG"
   },
   "host_permissions": [
-    "http://127.0.0.1/",
-    "http://www.example.com/",
+    "http://127.0.0.1/*",
     "https://game.maj-soul.com/*"
   ],
   "background": {
@@ -19,12 +18,25 @@
   "content_scripts": [
     {
       "matches": [
-        "http://127.0.0.1/",
-        "http://www.example.com/",
+        "http://127.0.0.1/*",
         "https://game.maj-soul.com/*"
       ],
       "js": [
         "content.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/tiles/*.PNG"
+      ],
+      "matches": [
+        "http://127.0.0.1/*",
+        "https://game.maj-soul.com/*"
       ]
     }
   ]

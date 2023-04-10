@@ -16,10 +16,11 @@ proxy.onWebSocketFrame((_ctx, _type, fromServer, data, flags, callback) => {
 proxy.listen({ port: mitmPort }, () => {
 	console.log(`proxy set up at port ${mitmPort}`)
 })
+
 http
 	.createServer((_req, res) => {
-		if (existsSync('./shanten.json')) {
-			const msg = JSON.stringify(require('./shanten.json'))
+		if (existsSync('./res.json')) {
+			const msg = JSON.stringify(require('./res.json'))
 			res
 				.writeHead(200, {
 					'Content-Length': Buffer.byteLength(msg),

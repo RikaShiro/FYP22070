@@ -24,11 +24,10 @@ class Parser {
 		setTimeout(() => {
 			screenshot({ format: 'png' }).then(async (img) => {
 				try {
-					const hand = await getHand(img)
-					const n = hand.length
+					const [hand, newTile] = await getHand(img)
+					const n = hand.length + 1
 					if (n % 4 === 2) {
-						console.log(hand)
-						analyzeHand(hand)
+						analyzeHand(hand, newTile)
 					}
 				} catch (e) {
 					console.error('getHand err')

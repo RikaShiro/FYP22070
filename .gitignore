@@ -3,12 +3,10 @@ node_modules
 .ipynb_checkpoints
 game-log
 .history/
-test.js
+test.*
 enumerations
 shanten
 .http
-
-!package.json
-
 shanten.json
+res.json
 extension/.history/

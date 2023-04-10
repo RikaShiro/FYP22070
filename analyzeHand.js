@@ -18,11 +18,13 @@ for (let i = 0; i < n; i++) {
 }
 E = null
 STN = null
-// analyzeHand([11, 11, 11, 12, 13, 31, 32, 33, 34, 35, 37, 71, 71, 71])
-// analyzeHand([11, 11, 11, 12, 12, 31, 31, 33, 33, 35, 37, 71, 71, 71])
+analyzeHand([11, 11, 11, 12, 13, 31, 32, 33, 34, 35, 71, 71, 71], 37)
+// analyzeHand([11, 11, 11, 12, 12, 31, 31, 33, 33, 35, 71, 71, 71], 37)
 module.exports = { analyzeHand, getShanten }
 
-function analyzeHand(hand) {
+function analyzeHand(hand, newTile) {
+	hand.push(newTile)
+	hand.sort((a, b) => a - b)
 	assert([14, 11, 8, 5, 2].includes(hand.length))
 	assert(!hand.includes(-1))
 	if (getShanten(hand) === -1) {
@@ -57,7 +59,7 @@ function analyzeHand(hand) {
 	if (DEBUG) {
 		parse(r, globalMin)
 	}
-	let ans = {
+	let res = {
 		mode: 1,
 		min: globalMin + 1,
 		discard: r
@@ -86,8 +88,13 @@ function analyzeHand(hand) {
 			compare(r13, 13)
 		}
 	}
-	console.log(ans)
-	writeFileSync('shanten.json', JSON.stringify(ans))
+	if (DEBUG) {
+		console.log(res)
+	}
+	res.discard = tile2pos(res.discard)
+	const lastDiscard = parseInt(Array.from(Object.keys(res.discard)).at(-1))
+	res.last = lastDiscard === hand.length ? true : false
+	writeFileSync('./res.json', JSON.stringify(res))
 
 	function analyze7(A) {
 		// if already win
@@ -265,11 +272,30 @@ function analyzeHand(hand) {
 	}
 
 	function compare({ min, discard } = r, mode) {
-		if (min < ans.min) {
-			ans = { mode, min, discard }
-		} else if (min === ans.min) {
-			ans.mode += mode
-			Object.assign(ans.discard, discard)
+		if (min < res.min) {
+			res = { mode, min, discard }
+		} else if (min === res.min) {
+			res.mode += mode
+			Object.assign(res.discard, discard)
+		}
+	}
+
+	function tile2pos(discard) {
+		const obj = {}
+		const i = hand.indexOf(newTile)
+		hand.splice(i, 1)
+		for (const [k, v] of Object.entries(discard)) {
+			obj[idx2pos(k)] = v
+		}
+		return obj
+
+		function idx2pos(x) {
+			x = parseInt(x)
+			if (x === newTile) {
+				return hand.length
+			} else {
+				return hand.indexOf(x)
+			}
 		}
 	}
 }
