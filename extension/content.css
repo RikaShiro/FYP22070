@@ -3,6 +3,7 @@
 	justify-content: center;
 	align-items: center;
 	position: absolute;
+	text-align: center;
 	z-index: 200000;
 	width: 95px;
 	height: 137px;
@@ -10,10 +11,12 @@
 	opacity: 0.3;
 	border-radius: 10px;
 	top: 935px;
+	transition-delay: 50ms;
 }
 
 .mask:hover {
-	top: 900px;
+	transform: translate(0, -48px);
+	transition-delay: 50ms;
 }
 
 .adv {

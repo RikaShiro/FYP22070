@@ -1,1 +1,2 @@
-
+chrome.action.onClicked.addListener(() => {
+})

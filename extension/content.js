@@ -1,4 +1,5 @@
 function generateMask(mode, stn, pos, discard, last) {
+	const wait = 50
 	const mask = document.createElement('div')
 	mask.className = 'mask'
 	const pairs = [7, 8, 20, 21]
@@ -23,15 +24,34 @@ function generateMask(mode, stn, pos, discard, last) {
 		img.setAttribute('title', tile)
 		adv.appendChild(img)
 	}
-	mask.addEventListener('mouseover', () => {
-		mask.innerText = ''
-		mask.appendChild(adv)
-	})
-	mask.addEventListener('mouseleave', () => {
-		mask.innerText = text
-		mask.removeChild(adv)
-	})
+
+	mask.addEventListener(
+		'mouseover',
+		debounce(function () {
+			mask.innerText = ''
+			mask.appendChild(adv)
+		}, wait)
+	)
+	mask.addEventListener(
+		'mouseleave',
+		debounce(function () {
+			mask.innerText = text
+			mask.removeChild(adv)
+		}, wait)
+	)
 	document.body.appendChild(mask)
+
+	function debounce(func, wait) {
+		let id = 0
+		return function (...args) {
+			if (id) {
+				clearTimeout(id)
+			}
+			id = setTimeout(() => {
+				func.apply(this, args)
+			}, wait)
+		}
+	}
 }
 
 function removeMask() {
@@ -41,17 +61,25 @@ function removeMask() {
 	}
 }
 
-fetch('http://127.0.0.1:22071')
-	.then((res) => res.json())
-	.then((data) => {
-		removeMask()
-		console.log(data)
-		const { mode, min, discard, last } = data
-		const arr = Array.from(Object.keys(discard))
-		const n = arr.length
-		for (let i = 0; i < n; i++) {
-			const k = parseInt(arr[i])
-			const v = discard[k]
-			generateMask(mode, min, k, v, last && i === n - 1)
-		}
-	})
+let request = null
+setInterval(() => {
+	fetch('http://127.0.0.1:22071')
+		.then((res) => res.json())
+		.then((data) => {
+			const record = JSON.stringify(data)
+			if (request === record) {
+				return
+			}
+			request = record
+			removeMask()
+			const { mode, min, discard, last } = data
+			const arr = Array.from(Object.keys(discard))
+			const n = arr.length
+			for (let i = 0; i < n; i++) {
+				const k = parseInt(arr[i])
+				const v = discard[k]
+				generateMask(mode, min, k, v, last && i === n - 1)
+			}
+		})
+}, 400)
+
