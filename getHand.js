@@ -3,7 +3,7 @@ const sharp = require('sharp')
 const { matchTemplate } = require('./matchTemplate.js')
 
 const options = JSON.parse(process.env.imageOptions)
-const threshold = 0.85
+const threshold = 0.8
 const A = []
 // ignore aka dora
 for (let i = 1; i <= 9; i++) {
@@ -54,8 +54,7 @@ async function getHand(fullscreen) {
 			const templ = await readImage(A[i])
 			const res = await matchTemplate(src, templ)
 			if (res > threshold) {
-				let tile = A[i].split('/').pop().split('.')[0]
-				tile = Number(tile)
+				const tile = parseInt(A[i].split('/').pop().split('.')[0])
 				return [tile, i]
 			}
 		}

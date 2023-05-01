@@ -1,6 +1,5 @@
 require('dotenv').config()
 const { readFileSync, writeFileSync } = require('node:fs')
-const { assert } = require('node:console')
 const { hand2int } = require('./helper.js')
 
 const DEBUG = process.env.DEBUG === 'true'
@@ -18,19 +17,34 @@ for (let i = 0; i < n; i++) {
 }
 E = null
 STN = null
-analyzeHand([11, 11, 11, 12, 13, 31, 32, 33, 34, 35, 71, 71, 71], 37)
+// analyzeHand([11, 11, 11, 12, 13, 31, 32, 33, 34, 35, 71, 71, 71], 37)
 // analyzeHand([11, 11, 11, 12, 12, 31, 31, 33, 33, 35, 71, 71, 71], 37)
 module.exports = { analyzeHand, getShanten }
 
 function analyzeHand(hand, newTile) {
 	hand.push(newTile)
 	hand.sort((a, b) => a - b)
-	assert([14, 11, 8, 5, 2].includes(hand.length))
-	assert(!hand.includes(-1))
-	if (getShanten(hand) === -1) {
+	if (hand.includes(-1)) {
+		console.log('wrong template', hand)
+	} else if (![14, 11, 8, 5, 2].includes(hand.length)) {
+		console.log('wrong length')
+	} else if (getShanten(hand) === -1) {
 		writeEmptyMsg()
-		return
+	} else {
+		getSuggestion(hand)
 	}
+}
+
+function getShanten(A) {
+	return STNT.get(hand2int(A))
+}
+
+function writeEmptyMsg() {
+	console.log('win')
+	writeFileSync('./res.json', JSON.stringify({}))
+}
+
+function getSuggestion(hand) {
 	const yama = new Yama().remove(hand)
 	const allTiles = getAllTiles()
 	const st = new Set(hand)
@@ -266,11 +280,6 @@ function analyzeHand(hand, newTile) {
 		}
 	}
 
-	function writeEmptyMsg() {
-		console.log('win')
-		writeFileSync('./res.json', JSON.stringify({}))
-	}
-
 	function compare({ min, discard } = r, mode) {
 		if (min < res.min) {
 			res = { mode, min, discard }
@@ -298,8 +307,4 @@ function analyzeHand(hand, newTile) {
 			}
 		}
 	}
-}
-
-function getShanten(A) {
-	return STNT.get(hand2int(A))
 }

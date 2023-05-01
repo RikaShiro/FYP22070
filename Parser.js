@@ -30,7 +30,7 @@ class Parser {
 						analyzeHand(hand, newTile)
 					}
 				} catch (e) {
-					console.error('getHand err')
+					console.error(e)
 				}
 			})
 		}, 750)

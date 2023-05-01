@@ -13,7 +13,7 @@ proxy.onWebSocketFrame((_ctx, _type, fromServer, data, flags, callback) => {
 	}
 	return callback(null, data, flags)
 })
-proxy.listen({ port: mitmPort }, () => {
+proxy.listen({ port: mitmPort, silent: true }, () => {
 	console.log(`proxy set up at port ${mitmPort}`)
 })
 
