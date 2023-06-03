@@ -31,7 +31,7 @@ function analyzeHand(hand, newTile) {
 	} else if (getShanten(hand) === -1) {
 		writeEmptyMsg()
 	} else {
-		getSuggestion(hand)
+		getSuggestion(hand, newTile)
 	}
 }
 
@@ -44,7 +44,7 @@ function writeEmptyMsg() {
 	writeFileSync('./res.json', JSON.stringify({}))
 }
 
-function getSuggestion(hand) {
+function getSuggestion(hand, newTile) {
 	const yama = new Yama().remove(hand)
 	const allTiles = getAllTiles()
 	const st = new Set(hand)
@@ -105,7 +105,7 @@ function getSuggestion(hand) {
 	if (DEBUG) {
 		console.log(res)
 	}
-	res.discard = tile2pos(res.discard)
+	res.discard = tile2pos(res.discard, newTile)
 	const lastDiscard = parseInt(Array.from(Object.keys(res.discard)).at(-1))
 	res.last = lastDiscard === hand.length ? true : false
 	writeFileSync('./res.json', JSON.stringify(res))
@@ -289,7 +289,7 @@ function getSuggestion(hand) {
 		}
 	}
 
-	function tile2pos(discard) {
+	function tile2pos(discard, newTile) {
 		const obj = {}
 		const i = hand.indexOf(newTile)
 		hand.splice(i, 1)

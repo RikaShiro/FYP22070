@@ -2022,9 +2022,45 @@
               "type": "uint32",
               "id": 53
             },
+            "tianming_mode": {
+              "type": "uint32",
+              "id": 54
+            },
             "disable_leijiyiman": {
               "type": "bool",
               "id": 60
+            },
+            "disable_double_yakuman": {
+              "type": "uint32",
+              "id": 62
+            },
+            "disable_composite_yakuman": {
+              "type": "uint32",
+              "id": 63
+            },
+            "enable_shiti": {
+              "type": "uint32",
+              "id": 64
+            },
+            "enable_nontsumo_liqi": {
+              "type": "uint32",
+              "id": 65
+            },
+            "disable_double_wind_four_fu": {
+              "type": "uint32",
+              "id": 66
+            },
+            "disable_angang_guoshi": {
+              "type": "uint32",
+              "id": 67
+            },
+            "enable_renhe": {
+              "type": "uint32",
+              "id": 68
+            },
+            "enable_baopai_extend_settings": {
+              "type": "uint32",
+              "id": 69
             }
           }
         },
@@ -2357,6 +2393,10 @@
               "rule": "repeated",
               "type": "I18nContext",
               "id": 11
+            },
+            "template_id": {
+              "type": "uint32",
+              "id": 12
             }
           }
         },
@@ -2756,6 +2796,10 @@
             "content": {
               "type": "string",
               "id": 3
+            },
+            "header_image": {
+              "type": "string",
+              "id": 4
             }
           }
         },
@@ -3032,6 +3076,11 @@
               "rule": "repeated",
               "type": "lq.ActivityUpgradeData",
               "id": 6
+            },
+            "gacha_data": {
+              "rule": "repeated",
+              "type": "lq.ActivityGachaUpdateData",
+              "id": 7
             }
           }
         },
@@ -3206,6 +3255,48 @@
                   "id": 2
                 }
               }
+            }
+          }
+        },
+        "GachaRecord": {
+          "fields": {
+            "id": {
+              "type": "uint32",
+              "id": 1
+            },
+            "count": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        },
+        "ActivityGachaData": {
+          "fields": {
+            "activity_id": {
+              "type": "uint32",
+              "id": 1
+            },
+            "gained": {
+              "rule": "repeated",
+              "type": "GachaRecord",
+              "id": 2
+            }
+          }
+        },
+        "ActivityGachaUpdateData": {
+          "fields": {
+            "activity_id": {
+              "type": "uint32",
+              "id": 1
+            },
+            "gained": {
+              "rule": "repeated",
+              "type": "GachaRecord",
+              "id": 2
+            },
+            "remain_count": {
+              "type": "uint32",
+              "id": 3
             }
           }
         },
@@ -3835,6 +3926,10 @@
             "face_black_count": {
               "type": "uint32",
               "id": 3
+            },
+            "ticket_face_black_count": {
+              "type": "uint32",
+              "id": 4
             }
           }
         },
@@ -4757,6 +4852,42 @@
             "chuanma": {
               "type": "uint32",
               "id": 46
+            },
+            "disable_double_yakuman": {
+              "type": "uint32",
+              "id": 62
+            },
+            "disable_composite_yakuman": {
+              "type": "uint32",
+              "id": 63
+            },
+            "enable_shiti": {
+              "type": "uint32",
+              "id": 64
+            },
+            "enable_nontsumo_liqi": {
+              "type": "uint32",
+              "id": 65
+            },
+            "disable_double_wind_four_fu": {
+              "type": "uint32",
+              "id": 66
+            },
+            "disable_angang_guoshi": {
+              "type": "uint32",
+              "id": 67
+            },
+            "enable_renhe": {
+              "type": "uint32",
+              "id": 68
+            },
+            "enable_baopai_extend_settings": {
+              "type": "uint32",
+              "id": 69
+            },
+            "fanfu": {
+              "type": "uint32",
+              "id": 70
             }
           }
         },
@@ -5207,6 +5338,349 @@
             }
           }
         },
+        "AccountResourceSnapshot": {
+          "fields": {
+            "bag_item": {
+              "rule": "repeated",
+              "type": "BagItemSnapshot",
+              "id": 1
+            },
+            "currency": {
+              "rule": "repeated",
+              "type": "CurrencySnapshot",
+              "id": 2
+            },
+            "title": {
+              "type": "TitleSnapshot",
+              "id": 3
+            },
+            "used_title": {
+              "type": "UsedTitleSnapshot",
+              "id": 4
+            }
+          },
+          "nested": {
+            "BagItemSnapshot": {
+              "fields": {
+                "resource_id": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "resource_count": {
+                  "type": "uint32",
+                  "id": 2
+                },
+                "resource_version": {
+                  "type": "uint32",
+                  "id": 3
+                }
+              }
+            },
+            "CurrencySnapshot": {
+              "fields": {
+                "currency_id": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "currency_count": {
+                  "type": "uint32",
+                  "id": 2
+                }
+              }
+            },
+            "TitleSnapshot": {
+              "fields": {
+                "title_list": {
+                  "rule": "repeated",
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "UsedTitleSnapshot": {
+              "fields": {
+                "title_id": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            }
+          }
+        },
+        "AccountCharacterSnapshot": {
+          "fields": {
+            "created_characters": {
+              "rule": "repeated",
+              "type": "uint32",
+              "id": 1
+            },
+            "removed_characters": {
+              "rule": "repeated",
+              "type": "Character",
+              "id": 2
+            },
+            "modified_characters": {
+              "rule": "repeated",
+              "type": "Character",
+              "id": 3
+            },
+            "main_character": {
+              "type": "MainCharacterSnapshot",
+              "id": 4
+            },
+            "skins": {
+              "type": "SkinsSnapshot",
+              "id": 5
+            },
+            "hidden_characters": {
+              "type": "HiddenCharacter",
+              "id": 6
+            }
+          },
+          "nested": {
+            "MainCharacterSnapshot": {
+              "fields": {
+                "character_id": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "SkinsSnapshot": {
+              "fields": {
+                "skin_list": {
+                  "rule": "repeated",
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "HiddenCharacter": {
+              "fields": {
+                "hidden_list": {
+                  "rule": "repeated",
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            }
+          }
+        },
+        "AccountMailRecord": {
+          "fields": {
+            "created_mails": {
+              "rule": "repeated",
+              "type": "uint32",
+              "id": 1
+            },
+            "removed_mails": {
+              "rule": "repeated",
+              "type": "MailSnapshot",
+              "id": 2
+            },
+            "modified_mails": {
+              "rule": "repeated",
+              "type": "MailSnapshot",
+              "id": 3
+            }
+          },
+          "nested": {
+            "MailSnapshot": {
+              "fields": {
+                "mail_id": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "reference_id": {
+                  "type": "uint32",
+                  "id": 2
+                },
+                "create_time": {
+                  "type": "uint32",
+                  "id": 3
+                },
+                "expire_time": {
+                  "type": "uint32",
+                  "id": 4
+                },
+                "take_attachment": {
+                  "type": "uint32",
+                  "id": 5
+                },
+                "attachments": {
+                  "rule": "repeated",
+                  "type": "RewardSlot",
+                  "id": 6
+                }
+              }
+            }
+          }
+        },
+        "AccountAchievementSnapshot": {
+          "fields": {
+            "achievements": {
+              "rule": "repeated",
+              "type": "AchievementProgress",
+              "id": 1
+            },
+            "rewarded_group": {
+              "type": "RewardedGroupSnapshot",
+              "id": 2
+            },
+            "version": {
+              "type": "AchievementVersion",
+              "id": 3
+            }
+          },
+          "nested": {
+            "RewardedGroupSnapshot": {
+              "fields": {
+                "rewarded_id": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "AchievementVersion": {
+              "fields": {
+                "version": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            }
+          }
+        },
+        "AccountMiscSnapshot": {
+          "fields": {
+            "faith_data": {
+              "type": "FaithData",
+              "id": 1
+            },
+            "vip_reward_gained": {
+              "type": "AccountVIPRewardSnapshot",
+              "id": 2
+            },
+            "vip": {
+              "type": "AccountVIP",
+              "id": 3
+            },
+            "shop_info": {
+              "type": "ShopInfo",
+              "id": 4
+            },
+            "month_ticket": {
+              "type": "AccountMonthTicketSnapshot",
+              "id": 5
+            }
+          },
+          "nested": {
+            "AccountVIPRewardSnapshot": {
+              "fields": {
+                "rewarded": {
+                  "rule": "repeated",
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "MonthTicketInfo": {
+              "fields": {
+                "id": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "end_time": {
+                  "type": "uint32",
+                  "id": 2
+                },
+                "last_pay_time": {
+                  "type": "uint32",
+                  "id": 3
+                },
+                "record_start_time": {
+                  "type": "uint32",
+                  "id": 4
+                },
+                "history": {
+                  "rule": "repeated",
+                  "type": "uint32",
+                  "id": 5
+                }
+              }
+            },
+            "AccountMonthTicketSnapshot": {
+              "fields": {
+                "tickets": {
+                  "rule": "repeated",
+                  "type": "MonthTicketInfo",
+                  "id": 1
+                }
+              }
+            },
+            "AccountVIP": {
+              "fields": {
+                "vip": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            }
+          }
+        },
+        "AccountGiftCodeRecord": {
+          "fields": {
+            "used_gift_code": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "AccSn": {
+          "fields": {
+            "resource": {
+              "type": "AccountResourceSnapshot",
+              "id": 1
+            },
+            "character": {
+              "type": "AccountCharacterSnapshot",
+              "id": 2
+            },
+            "mail": {
+              "type": "AccountMailRecord",
+              "id": 3
+            },
+            "achievement": {
+              "type": "AccountAchievementSnapshot",
+              "id": 4
+            },
+            "misc": {
+              "type": "AccountMiscSnapshot",
+              "id": 5
+            },
+            "gift_code": {
+              "type": "AccountGiftCodeRecord",
+              "id": 6
+            }
+          }
+        },
+        "AccSnDa": {
+          "fields": {
+            "account_id": {
+              "type": "uint32",
+              "id": 1
+            },
+            "time": {
+              "type": "uint32",
+              "id": 2
+            },
+            "snapshot": {
+              "type": "bytes",
+              "id": 3
+            }
+          }
+        },
         "Lobby": {
           "methods": {
             "fetchConnectionInfo": {
@@ -5220,6 +5694,10 @@
             "cancelQueue": {
               "requestType": "ReqCommon",
               "responseType": "ResCommon"
+            },
+            "openidCheck": {
+              "requestType": "ReqOpenidCheck",
+              "responseType": "ResOauth2Check"
             },
             "signup": {
               "requestType": "ReqSignupAccount",
@@ -6073,6 +6551,10 @@
               "requestType": "ReqCompleteActivityTask",
               "responseType": "ResCommon"
             },
+            "completePeriodActivityTaskBatch": {
+              "requestType": "ReqCompletePeriodActivityTaskBatch",
+              "responseType": "ResCommon"
+            },
             "completeRandomActivityTask": {
               "requestType": "ReqCompleteActivityTask",
               "responseType": "ResCommon"
@@ -6336,6 +6818,10 @@
             "fetchRecentFriend": {
               "requestType": "ReqCommon",
               "responseType": "ResFetchrecentFriend"
+            },
+            "openGacha": {
+              "requestType": "ReqOpenGacha",
+              "responseType": "ResOpenGacha"
             }
           }
         },
@@ -6364,6 +6850,18 @@
             "rank": {
               "type": "uint32",
               "id": 3
+            }
+          }
+        },
+        "ReqOpenidCheck": {
+          "fields": {
+            "type": {
+              "type": "uint32",
+              "id": 1
+            },
+            "token": {
+              "type": "string",
+              "id": 2
             }
           }
         },
@@ -10904,6 +11402,11 @@
               "rule": "repeated",
               "type": "lq.ActivityUpgradeData",
               "id": 21
+            },
+            "gacha_data": {
+              "rule": "repeated",
+              "type": "lq.ActivityGachaUpdateData",
+              "id": 22
             }
           },
           "nested": {
@@ -11057,6 +11560,15 @@
         "ReqCompleteActivityTask": {
           "fields": {
             "task_id": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "ReqCompletePeriodActivityTaskBatch": {
+          "fields": {
+            "task_list": {
+              "rule": "repeated",
               "type": "uint32",
               "id": 1
             }
@@ -12748,6 +13260,45 @@
             }
           }
         },
+        "ReqOpenGacha": {
+          "fields": {
+            "activity_id": {
+              "type": "uint32",
+              "id": 1
+            },
+            "count": {
+              "type": "uint32",
+              "id": 2
+            }
+          }
+        },
+        "ResOpenGacha": {
+          "fields": {
+            "error": {
+              "type": "Error",
+              "id": 1
+            },
+            "result_list": {
+              "rule": "repeated",
+              "type": "uint32",
+              "id": 2
+            },
+            "reward_items": {
+              "rule": "repeated",
+              "type": "ExecuteReward",
+              "id": 3
+            },
+            "sp_reward_items": {
+              "rule": "repeated",
+              "type": "ExecuteReward",
+              "id": 4
+            },
+            "remain_count": {
+              "type": "uint32",
+              "id": 5
+            }
+          }
+        },
         "ActionMJStart": {
           "fields": {}
         },
@@ -12912,6 +13463,10 @@
             "field_spell": {
               "type": "uint32",
               "id": 18
+            },
+            "sha256": {
+              "type": "string",
+              "id": 19
             }
           }
         },
@@ -13009,6 +13564,10 @@
             "field_spell": {
               "type": "uint32",
               "id": 21
+            },
+            "sha256": {
+              "type": "string",
+              "id": 22
             }
           },
           "nested": {
@@ -13476,6 +14035,20 @@
             "baopai": {
               "type": "uint32",
               "id": 21
+            },
+            "baopai_seats": {
+              "rule": "repeated",
+              "type": "uint32",
+              "id": 22
+            },
+            "lines": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 23
+            },
+            "tianming_bonus": {
+              "type": "uint32",
+              "id": 24
             }
           }
         },
